@@ -1,0 +1,138 @@
+@charset "utf-8";
+/* CSS Document */
+
+/************Navigation Begin*********************************************************/
+
+#primary-navigation {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: relative;
+	font-size: 11px;
+	z-index: 10;
+}
+
+#primary-navigation li {
+	display: block;
+	float: left;
+	margin: 0;
+	padding: 0;
+	position: relative; 
+	background: url(../images/separator.gif) no-repeat 100% 6px;
+}
+
+#primary-navigation li.last {
+	background-image: none;
+}
+
+#primary-navigation li a {
+	display: block;
+	float: left;
+	height: 22px;
+	line-height: 16px;
+	color: #477AC3;
+	padding: 0 0 0 3px;
+	text-decoration: none;
+	white-space: nowrap;
+	font-weight: bold;
+}
+
+#primary-navigation li a.active {
+	color: #F69401;
+}
+
+#primary-navigation li a span {
+	display: block;
+	float: left;
+	padding: 3px 9px 0 5px;
+	cursor: pointer;
+	height: 19px;
+}
+
+#primary-navigation li a:hover {
+	color: #F69401;
+}
+
+#primary-navigation li.hover a {
+	color: #F69401;
+	height: 19px;
+	overflow: hidden;
+	z-index: 10;
+	position: relative;
+	margin-left: -1px;
+	padding-left: 4px;
+	background: url(../images/link-main-left.gif) no-repeat;
+}
+
+#primary-navigation li.hover a span {
+	cursor: pointer;
+	background: url(../images/link-main-right.gif) no-repeat top right;
+}
+
+#primary-navigation li div {
+	display: none;
+	background: url(../images/dropdown-top.gif) no-repeat;
+	padding: 4px 0 0 0;
+	width: 168px;
+	position: absolute;
+	top: 18px;
+	left: -1px;
+}
+
+#primary-navigation ul {
+	margin: 0;
+	padding: 0 8px 4px 8px;
+	list-style: none;
+	width: 152px;
+	background: url(../images/dropdown-bottom.gif) no-repeat bottom left;
+}
+
+#primary-navigation ul li {
+	display: block;
+	float: none;
+	margin: 0;
+	padding: 1px 0 1px 0;
+	background: none;
+	border-top: 1px solid #C9D6E8;
+	_border-top: expression( (this===this.parentNode.childNodes[0]) ? "none" : "auto");
+	width: 152px;
+}
+
+#primary-navigation ul li:first-child {
+	border-top: none;
+}
+
+#primary-navigation li.hover ul li a {
+	white-space: normal;
+	display: block;
+	float: none;
+	height: auto;
+	font-weight: normal;
+	color: #477AC3;
+	background: none;
+	padding: 8px 0 8px 0;
+	width: 100%;
+	margin: 0;
+	line-height: 14px;
+}
+
+#primary-navigation li.hover ul li a:hover, #primary-navigation li.hover ul li:hover a {
+	background: url(../images/gradient.gif) repeat-y top;
+	margin: 0;
+	padding: 8px 0 8px 0;
+	color: #477AC3;
+}
+
+#primary-navigation li.hover ul li a.active{
+	font-weight: bold;
+	background: url(../images/gradient.gif) repeat-y top;
+	margin: 0;
+	padding: 8px 0 8px 0;
+	color: #477AC3;
+}
+
+#primary-navigation li.hover div {
+	display: block;
+}
+
+/************Navigation End*********************************************************/

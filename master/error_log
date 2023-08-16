@@ -1,0 +1,12 @@
+[31-Aug-2016 04:12:46 America/Denver] PHP Warning:  mysqli_connect(): Operation now in progress in /home/relyonsofts/public_html/lms/functions/phpfunctions.php on line 14
+[31-Aug-2016 04:23:09 America/Denver] PHP Warning:  mysqli_connect(): Operation now in progress in /home/relyonsofts/public_html/lms/functions/phpfunctions.php on line 14
+[07-Nov-2016 05:41:30 America/Denver] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be resource, boolean given in /home/relyonsofts/public_html/lms/master/dealer-1.php on line 149
+[07-Nov-2016 05:41:30 America/Denver] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be resource, boolean given in /home/relyonsofts/public_html/lms/master/dealer-1.php on line 168
+[07-Nov-2016 05:41:30 America/Denver] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be resource, boolean given in /home/relyonsofts/public_html/lms/master/dealer-1.php on line 204
+[07-Nov-2016 21:36:10 America/Denver] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be resource, boolean given in /home/relyonsofts/public_html/lms/master/dealer-1.php on line 149
+[07-Nov-2016 21:36:10 America/Denver] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be resource, boolean given in /home/relyonsofts/public_html/lms/master/dealer-1.php on line 168
+[07-Nov-2016 21:36:10 America/Denver] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be resource, boolean given in /home/relyonsofts/public_html/lms/master/dealer-1.php on line 204
+[07-Nov-2016 21:36:50 America/Denver] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be resource, boolean given in /home/relyonsofts/public_html/lms/master/dealer-1.php on line 149
+[07-Nov-2016 21:36:50 America/Denver] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be resource, boolean given in /home/relyonsofts/public_html/lms/master/dealer-1.php on line 168
+[07-Nov-2016 21:36:50 America/Denver] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be resource, boolean given in /home/relyonsofts/public_html/lms/master/dealer-1.php on line 204
+[07-Nov-2016 21:37:09 America/Denver] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be resource, boolean given in /home/relyonsofts/public_html/lms/master/manager-1.php on line 142

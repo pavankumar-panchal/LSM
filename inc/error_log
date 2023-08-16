@@ -1,0 +1,2 @@
+[11-Oct-2018 22:51:21 America/Denver] PHP Parse error:  syntax error, unexpected 'include' (T_INCLUDE), expecting ',' or ';' in /home/relyonsofts/public_html/lms/inc/lmsdealers.php on line 3
+[11-Oct-2018 23:23:23 America/Denver] PHP Fatal error:  Call to undefined function runmysqlquery() in /home/relyonsofts/public_html/lms/inc/lmsdealers.php on line 4

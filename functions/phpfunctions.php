@@ -1,5 +1,10 @@
 <?
 //Include Database Configuration details
+error_reporting("E_ALL");
+ini_setup("display_errors",1);
+
+
+
 if(file_exists("../inc/dbconfig.php"))
 {
 	include("../inc/dbconfig.php");

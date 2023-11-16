@@ -1,4 +1,4 @@
-<?
+<?php
 include("../inc/checklogin.php");
 
 //Permission check for the page
@@ -75,13 +75,13 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>LMS | MCA Companies</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<? echo (rand());?>">
-<link media="screen" rel="stylesheet" href="../css/colorbox.css?dummy=<? echo (rand());?>">
-<script src="../functions/jquery-1.4.2.min.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script src="../functions/jsfunctions.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script src="../functions/mcacompanies.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script src="../functions/colorbox.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script language="javascript" src="../functions/clipboardcopy.js?dummy=<? echo (rand());?>"></script>
+<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand());?>">
+<link media="screen" rel="stylesheet" href="../css/colorbox.css?dummy=<?php echo (rand());?>">
+<script src="../functions/jquery-1.4.2.min.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/jsfunctions.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/mcacompanies.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/colorbox.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script language="javascript" src="../functions/clipboardcopy.js?dummy=<?php echo (rand());?>"></script>
 
 
 <!--[if lt IE 7]>
@@ -93,7 +93,7 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
   <tr>
     <td class="pageheader"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="28"><? include("../inc/header1.php"); ?></td>
+        <td height="28"><?php include("../inc/header1.php"); ?></td>
       </tr>
       <tr>
         <td height="58" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -104,7 +104,7 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
             <td height="54"><table width="99%" border="0" align="center" cellpadding="2" cellspacing="0">
               <tr>
                 <td width="14%"><a href="http://lms.relyonsoft.net"><img src="../images/lms-logo.gif" alt="Lead Management Software" width="100" height="50" border="0" /></a></td>
-                <td width="86%"><? include("../inc/navigation.php"); ?></td>
+                <td width="86%"><?php include("../inc/navigation.php"); ?></td>
               </tr>
             </table></td>
           </tr>
@@ -230,12 +230,12 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                                                       <td width="11%">State:</td>
                                                       <td width="37%"><select name="mca_state" class="formfields" id="mca_state" style="width:200px;">
                                                         <option value = "">All</option>
-                                                        <? include('../inc/mcastate.php'); ?>
+                                                        <?php include('../inc/mcastate.php'); ?>
                                                       </select></td>
                                                       <td width="16%">Class:</td>
                                                       <td width="36%"><select name="mca_class" class="formfields" id="mca_class"style="width:120px;">
                                                         <option value = "" selected="selected">All</option>
-                                                        <? include('../inc/mcaclass.php'); ?>
+                                                        <?php include('../inc/mcaclass.php'); ?>
                                                       </select></td>
                                                     </tr>
                                                     <tr>
@@ -247,7 +247,7 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                                                     <tr>
                                                       <td>Roc Code:</td>
                                                       <td><select name="mca_roccode" class="formfields" id="mca_roccode" style="width:200px;">
-                                                        <option value = "">All</option><? include('../inc/mcaroc-code.php'); ?>
+                                                        <option value = "">All</option><?php include('../inc/mcaroc-code.php'); ?>
                                                       </select></td>
                                                       <td>Paid up capital:</td>
                                                       <td><select name="mca_puc" class="formfields" id="mca_puc" style="width:120px;">
@@ -266,7 +266,7 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                                                       <td>Branch:</td>
                                                       <td><select name="mca_branch" class="formfields" id="mca_branch" style="width:200px;">
                                                         <option value = "">All</option>
-                                                        <? include('../inc/mcabranch.php'); ?>
+                                                        <?php include('../inc/mcabranch.php'); ?>
                                                       </select></td>
                                                       <td>&nbsp;</td>
                                                       <td>&nbsp;</td>
@@ -312,7 +312,7 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                           <td width="115" bgcolor="#FBFEFF"><strong>Company Name:
                             </strong>
                             <input name="lastslno" type="hidden" id="lastslno" />
-                            <input name="cookie_usertype" type="hidden" id="cookie_usertype" value="<? echo($cookie_usertype); ?>" /></td>
+                            <input name="cookie_usertype" type="hidden" id="cookie_usertype" value="<?php echo($cookie_usertype); ?>" /></td>
                           <td colspan="3" bgcolor="#FBFEFF"><font color="#FF0000"><strong><div id="form_companyname"></div></strong></font></td>
                         </tr>
                         <tr bgcolor="#F4FDFF">
@@ -415,7 +415,7 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                       <tr>
                         <td>State:</td>
                         <td><select name="state" class="formfields" id="state" onchange="districtselect()" style="width:325px">
-                              <? include('../inc/state.php')?>
+                              <?php include('../inc/state.php')?>
                           </select></td>
                         <td>STD code:</td>
                         <td><input name="stdcode" type="text" class="formfields" id="stdcode"  size="30" maxlength="6" autocomplete ="off"  /></td>
@@ -487,7 +487,7 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                           <td width="114" valign="top"><strong>Product Name:</strong></td>
                           <td colspan="2" valign="top"><select name="form_product" class="formfields" id="form_product"  style="width:170px">
                            <option value="" selected="selected">- - -Make a Selection- - -</option>
-                            <?
+                            <?php
 							
 						include('../inc/product.php');
 						?>
@@ -525,7 +525,7 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                           
                             
                           <span>  <select name="form_dealer" class="formfields" id="form_dealer" style="display:none;width:170px"   >
-                              <?
+                              <?php
 						echo($dealerselect);
 						?>
                               </select> </span></div>                            </td>

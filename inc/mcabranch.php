@@ -1,4 +1,4 @@
-<?
+<?php
 $showmcalistvalues = getshowmcapermissionvalue();
 $showmcalistvaluessplit = explode('^',$showmcalistvalues);
 if($showmcalistvaluessplit[0] == 'yes' && $showmcalistvaluessplit[1] <> '')

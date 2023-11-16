@@ -1,4 +1,4 @@
-<?
+<?php
 
 include("../functions/phpfunctions.php");
 include("../inc/getuserslno.php");

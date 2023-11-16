@@ -1,4 +1,4 @@
-<?
+<?php
 
 //Select the list of products for the drop-down
 $query = "SELECT id,productname FROM products ORDER BY productname";

@@ -1,4 +1,6 @@
-<?
+<?php
+error_reporting(E_ALL);
+ini_set("display_errors",1);
 include("../inc/checklogin.php");
 
 //Permission check for the page
@@ -35,9 +37,9 @@ while($fetch = mysqli_fetch_array($result))
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>LMS | Lead Transfer</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<? echo (rand());?>">
-<script src="../functions/jsfunctions.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script src="../functions/leadtransfer1.js?dummy=<? echo (rand());?>" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand());?>">
+<script src="../functions/jsfunctions.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/leadtransfer1.js?dummy=<?php echo (rand());?>" language="javascript"></script>
 <!--[if lt IE 7]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
 <![endif]-->
@@ -58,8 +60,8 @@ while($fetch = mysqli_fetch_array($result))
                 <td height="54"><table width="99%" border="0" align="center" cellpadding="2" cellspacing="0">
                     <tr>
                       <td width="14%"><a href="http://lms.relyonsoft.net"><img src="../images/lms-logo.gif" alt="Lead Management Software" width="100" height="50" border="0" /></a></td>
-                      <td width="86%"><? include("../inc/header1.php"); ?>
-                        <? include("../inc/navigation.php"); ?></td>
+                      <td width="86%"><?php include("../inc/header1.php"); ?>
+                        <?php include("../inc/navigation.php"); ?></td>
                     </tr>
                   </table></td>
               </tr>
@@ -118,7 +120,7 @@ while($fetch = mysqli_fetch_array($result))
                                   <td width="50%">From Dealer: <span id="productdisplay2"><font color="#FF6600">-Select a lead-</font></span></td>
                                   <td width="50%">To Dealer:
                                     <select name="form_dealer" class="formfields" id="form_dealer">
-                                      <?
+                                      <?php
 						echo($dealerselect);
 						?>
                                     </select></td>

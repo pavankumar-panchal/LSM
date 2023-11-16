@@ -1,4 +1,4 @@
-<?
+<?php
 //  To display ROC-Code
 $query = "select distinct roccode from mca_companies order by roccode;";
 $result = runmysqlquery($query);

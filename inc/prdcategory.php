@@ -1,4 +1,4 @@
-<?
+<?php
 //  To display ROC-Code
 $query = "select distinct category from products;;";
 $result = runmysqlquery($query);

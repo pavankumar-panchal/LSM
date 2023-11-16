@@ -1,4 +1,4 @@
-<?
+<?php
 include("../inc/checklogin.php");
 //Permission check for the page
 if($cookie_usertype <> "Dealer" && $cookie_usertype <> "Sub Admin" && $cookie_usertype <> "Reporting Authority" && $cookie_usertype <> "Admin" && $cookie_usertype <> "Dealer Member")
@@ -230,21 +230,21 @@ while($fetch6 = mysqli_fetch_array($result6))
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>LMS | Send Bulk SMS</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<? echo (rand());?>">
-<link type="text/css" rel="stylesheet" href="../css/datepickercontrol.css?dummy=<? echo (rand());?>">
+<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand());?>">
+<link type="text/css" rel="stylesheet" href="../css/datepickercontrol.css?dummy=<?php echo (rand());?>">
 <link media="screen" rel="stylesheet" href="../css/colorbox.css" />
-<script src="../functions/jquery-1.4.2.min.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script src="../functions/jsfunctions.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script src="../functions/bulksms.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script src="../functions/colorbox.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script src="../functions/datepickercontrol.js?dummy=<? echo (rand());?>" language="javascript"></script>
+<script src="../functions/jquery-1.4.2.min.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/jsfunctions.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/bulksms.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/colorbox.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/datepickercontrol.js?dummy=<?php echo (rand());?>" language="javascript"></script>
 </head>
 <body>
 <table width="950" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td class="pageheader"><table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td height="28"><? include("../inc/header1.php"); ?></td>
+          <td height="28"><?php include("../inc/header1.php"); ?></td>
         </tr>
         <tr>
           <td height="58" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -255,7 +255,7 @@ while($fetch6 = mysqli_fetch_array($result6))
                 <td height="54"><table width="99%" border="0" align="center" cellpadding="2" cellspacing="0">
                     <tr>
                       <td width="14%"><a href="http://useradmin.relyonsoft.com"><img src="../images/lms-logo.gif" alt="Lead Management Software" width="100" height="50" border="0" /></a></td>
-                      <td width="86%"><? include("../inc/navigation.php"); ?></td>
+                      <td width="86%"><?php include("../inc/navigation.php"); ?></td>
                     </tr>
                   </table></td>
               </tr>
@@ -355,23 +355,23 @@ while($fetch6 = mysqli_fetch_array($result6))
                                 <td colspan="4"><table width="100%" border="0" cellspacing="0" cellpadding="4" style="border-bottom:1px solid #CCCCCC">
                                     <tr>
                                       <td width="11%">From Date : </td>
-                                      <td width="37%"><input name="fromdate" type="text" class="formfields" id="DPC_fromdate" size="20" maxlength="10" value="<? echo($date); ?>"  style="width:50%" readonly="readonly"/>
+                                      <td width="37%"><input name="fromdate" type="text" class="formfields" id="DPC_fromdate" size="20" maxlength="10" value="<?php echo($date); ?>"  style="width:50%" readonly="readonly"/>
                                         <input type="hidden" name="hiddenfromdate" id="hiddenfromdate" /></td>
                                       <td width="13%">To Date : </td>
-                                      <td width="39%"><input name="todate" type="text" class="formfields" id="DPC_todate" size="20" maxlength="10" value="<? echo($defaulttodate); ?>" style="width:50%" readonly="readonly"/>
+                                      <td width="39%"><input name="todate" type="text" class="formfields" id="DPC_todate" size="20" maxlength="10" value="<?php echo($defaulttodate); ?>" style="width:50%" readonly="readonly"/>
                                         <input type="hidden" name="hiddentodate" id="hiddentodate" /></td>
                                     </tr>
                                     <tr>
                                       <td>Product Name : </td>
                                       <td width="37%"><select name="productid" class="formfields" id="productid" style="width:50%">
-                                          <? 
+                                          <?php 
 						echo($productselect);
 						?>
                                         </select>
                                         <input type="hidden" name="hiddenproductid" id="hiddenproductid" /></td>
                                       <td width="13%">Dealer Name: </td>
                                       <td width="39%"><select name="dealerid" class="formfields" id="dealerid" style="width:50%">
-                                          <? 
+                                          <?php 
 						echo($dealerselect);
 						?>
                                         </select>
@@ -380,14 +380,14 @@ while($fetch6 = mysqli_fetch_array($result6))
                                     <tr>
                                       <td>Given By : </td>
                                       <td width="37%"><select name="givenby" class="formfields" id="givenby" style="width:50%">
-                                          <? 
+                                          <?php 
 						echo($givenselect);
 						?>
                                         </select>
                                         <input type="hidden" name="hiddengivenby" id="hiddengivenby" /></td>
                                       <td width="13%">Status of Lead :</td>
                                       <td width="39%"><select name="leadstatus" class="formfields" id="leadstatus" style="width:50%">
-                                          <? 
+                                          <?php 
 						echo($leadstatusselect);
 						?>
                                         </select>
@@ -398,7 +398,7 @@ while($fetch6 = mysqli_fetch_array($result6))
                                         <label for="dropterminatedstatus">Do not consider Order Closed / Fake / Exsting Users / Not Interested</label></td>
                                       <td>Lead Source:</td>
                                       <td><select name="form_source" class="formfields" id="form_source" style="width:50%">
-                                          <? echo($referenceselect); ?>
+                                          <?php echo($referenceselect); ?>
                                         </select>
                                         <input type="hidden" name="hiddensource" id="hiddensource" /></td>
                                     </tr>
@@ -428,16 +428,16 @@ while($fetch6 = mysqli_fetch_array($result6))
                                 <td colspan="4"><table width="100%" border="0" cellspacing="0" cellpadding="4">
                                     <tr>
                                       <td width="11%">From Date : </td>
-                                      <td width="37%"><input name="filter_followupdate1" type="text" class="formfields" id="DPC_filter_followupdate1" size="20" maxlength="10" value="<? echo($defaulttodate); ?>" disabled="disabled" style="width:50%" readonly="readonly"/>
+                                      <td width="37%"><input name="filter_followupdate1" type="text" class="formfields" id="DPC_filter_followupdate1" size="20" maxlength="10" value="<?php echo($defaulttodate); ?>" disabled="disabled" style="width:50%" readonly="readonly"/>
                                         <input name="filter_followupdate1hdn" type="hidden" class="formfields" id="filter_followupdate1hdn" value="" /></td>
                                       <td width="13%">To Date : </td>
-                                      <td width="39%"><input name="filter_followupdate2" type="text" class="formfields" id="DPC_filter_followupdate2" size="20" maxlength="10" value="<? echo($defaulttodate); ?>" disabled="disabled"  style="width:50%" readonly="readonly"/>
+                                      <td width="39%"><input name="filter_followupdate2" type="text" class="formfields" id="DPC_filter_followupdate2" size="20" maxlength="10" value="<?php echo($defaulttodate); ?>" disabled="disabled"  style="width:50%" readonly="readonly"/>
                                         <input name="filter_followupdate2hdn" type="hidden" class="formfields" id="filter_followupdate2hdn" value="" /></td>
                                     </tr>
                                     <tr>
                                       <td>Entered By :</td>
                                       <td><select name="followedby" id="followedby" style="width:50%" disabled="disabled">
-                                          <? 
+                                          <?php 
 						echo($givenselect1);
 						?>
                                         </select>

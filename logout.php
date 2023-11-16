@@ -2,6 +2,8 @@
 
 	include("functions/phpfunctions.php");
 	lmsuserlogout();
+	session_start();
+	session_destroy();
 	header("Location:./index.php");
 	
 	/*if(lmsgetcookie('lmsusername') == false || lmsgetcookie('lmsusersort') == false || lmsgetcookie('lmslastlogindate') == false || lmsgetcookie('applicationid') == false)

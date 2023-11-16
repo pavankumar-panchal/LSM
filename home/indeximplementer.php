@@ -1,4 +1,7 @@
-<?
+<?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
 include("../inc/checklogin.php");
 include("../inc/checksession.php");
 
@@ -21,20 +24,20 @@ $impemail = $result['impemail'];
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>LMS | Implementer Dashboard</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<? echo (rand());?>">
-<script src="../functions/jsfunctions.js?dummy=<? echo (rand());?>" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand());?>">
+<script src="../functions/jsfunctions.js?dummy=<?php echo (rand());?>" language="javascript"></script>
 <!--[if lt IE 7]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
 <![endif]-->
 </head>
 <body>
 <div style="left: -1000px; top: 597px; visibility: hidden;" id="dhtmltooltip">dummy</div>
-<script src="../functions/tooltip.js?dummy=<? echo (rand());?>" language="javascript"></script>
+<script src="../functions/tooltip.js?dummy=<?php echo (rand());?>" language="javascript"></script>
 <table width="950" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td class="pageheader"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="28"><? include("../inc/header1.php"); ?></td>
+        <td height="28"><?php include("../inc/header1.php"); ?></td>
       </tr>
       <tr>
         <td height="58" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -45,7 +48,7 @@ $impemail = $result['impemail'];
             <td height="54"><table width="99%" border="0" align="center" cellpadding="2" cellspacing="0">
               <tr>
                 <td width="14%"><a href="http://lms.relyonsoft.net"><img src="../images/lms-logo.gif" alt="Lead Management Software" width="100" height="50" border="0" /></a></td>
-                <td width="86%"><? include("../inc/navigation.php"); ?></td>
+                <td width="86%"><?php include("../inc/navigation.php"); ?></td>
               </tr>
             </table></td>
           </tr>
@@ -78,7 +81,7 @@ $impemail = $result['impemail'];
       <tr>
         <td height="300" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="4">
           <tr>
-            <td><strong><font style="font-size:16px" color="#0099CC">Welcome <? echo($impname); ?>!!</font></strong></td>
+            <td><strong><font style="font-size:16px" color="#0099CC">Welcome <?php echo($impname); ?>!!</font></strong></td>
           </tr>
           <tr>
             <td><table width="100%" border="0" cellspacing="0" cellpadding="2">
@@ -108,10 +111,10 @@ $impemail = $result['impemail'];
                           <td bgcolor="#0099CC"><strong><font color="#FFFFFF">User Profile</font></strong></td>
                         </tr>
                         <tr>
-                          <td valign="top" class="dashboard-box"><strong><font color="#0099CC"><? echo($impname); ?></font></strong><br />
-                              <? echo($implocation); ?><br />
-                            Cell No: <? echo($impcell); ?><br />
-                            Email: <? echo($impemail); ?><br />
+                          <td valign="top" class="dashboard-box"><strong><font color="#0099CC"><?php echo($impname); ?></font></strong><br />
+                              <?php echo($implocation); ?><br />
+                            Cell No: <?php echo($impcell); ?><br />
+                            Email: <?php echo($impemail); ?><br />
                           </td>
                         </tr>
                         <tr>

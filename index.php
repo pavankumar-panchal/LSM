@@ -1,6 +1,8 @@
 <?php
-include("./functions/phpfunctions.php");
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 session_start();
+include("./functions/phpfunctions.php");
 $isloggedin = 'false';
 
 if ((lmsgetcookie('applicationid') == '8616153779973246153879') && (lmsgetcookie('sessionkind') <> false) && (lmsgetcookie('lmsusername') <> false) && (lmsgetcookie('lmsusersort') <> false) && (lmsgetcookie('lmslastlogindate') <> false)) {
@@ -9,14 +11,29 @@ if ((lmsgetcookie('applicationid') == '8616153779973246153879') && (lmsgetcookie
   $isloggedin = 'true';
 }
 
-if ($cookie_logintype == 'logoutforthreemin' || $cookie_logintype == 'logoutforsixhr' || $cookie_logintype == 'logoutforever') {
+// if ($cookie_logintype == 'logoutforthreemin' || $cookie_logintype == 'logoutforsixhr' || $cookie_logintype == 'logoutforever') {
 
+//   if ($_SESSION['verificationid'] == '4563464364365554545454') {
+//     $isloggedin = 'true';
+//   } else {
+//     $isloggedin = 'false';
+//   }
+// }
+
+// modified ------
+
+$message = "";
+
+$cookie_logintype = isset($_COOKIE['logintype']) ? $_COOKIE['logintype'] : '';
+
+if ($cookie_logintype == 'logoutforthreemin' || $cookie_logintype == 'logoutforsixhr' || $cookie_logintype == 'logoutforever') {
   if ($_SESSION['verificationid'] == '4563464364365554545454') {
     $isloggedin = 'true';
   } else {
     $isloggedin = 'false';
   }
 }
+
 
 if ($isloggedin == 'true') {
 
@@ -112,20 +129,18 @@ if (isset($_POST['login'])) {
       //Insert logs to login table
       $query = "Insert into lms_logs_event(userid,system,eventtype,eventdatetime) values('" . $userslno . "','" . $systemip . "','43','" . $logindate . ' ' . $logintime . "')";
       $result = runmysqlquery_log($query);
-      //if(isset($_GET['link']) && isurl($_GET['link']) && isvalidhostname($_GET['link']))
+      // if(isset($_GET['link']) && isurl($_GET['link']) && isvalidhostname($_GET['link']))
       if (isset($_GET['link']) && isurl($_GET['link']) && isvalidhostname($_GET['link'])) {
         header('Location:' . $_GET['link']);
       } else {
         header('Location:' . './home/confirmation.php');
       }
-
     }
   }
 }
 
 ?>
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -191,9 +206,7 @@ if (isset($_POST['login'])) {
     <tr>
       <td height="1"></td>
     </tr>
-    <tr>
-      <td class="bannerbg" height="50" style="background:red;color:#fff;text-align:center;font-size:21px">TEST LINK</td>
-    </tr>
+
     <tr>
       <td valign="middle" bgcolor="#D2D8FB" class="contentheader">
         <table width="99%" border="0" align="center" cellpadding="4" cellspacing="0">
@@ -335,15 +348,7 @@ if (isset($_POST['login'])) {
         </table>
       </td>
     </tr>
-    <tr>
-      <td class="bannerbg" height="50" style="background:red;color:#fff;text-align:center;font-size:21px">TEST LINK</td>
-    </tr>
   </table>
-
-
 </body>
 
 </html>
-
-
-abcd

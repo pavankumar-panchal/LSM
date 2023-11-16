@@ -1,4 +1,4 @@
-<?
+<?php
 
 include("../inc/checklogin.php");
 
@@ -96,10 +96,10 @@ while($fetch6 = mysqli_fetch_array($result6))
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>LMS | Upload Leads</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<? echo (rand());?>">
-<script src="../functions/jquery-1.4.2.min.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script src="../functions/jsfunctions.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script src="../functions/leadupload.js?dummy=<? echo (rand());?>" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand());?>">
+<script src="../functions/jquery-1.4.2.min.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/jsfunctions.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/leadupload.js?dummy=<?php echo (rand());?>" language="javascript"></script>
 
 <!--[if lt IE 7]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
@@ -107,13 +107,13 @@ while($fetch6 = mysqli_fetch_array($result6))
 </head>
 <body>
 <div style="left: -1000px; top: 597px; visibility: hidden;" id="dhtmltooltip1">dummy</div>
-<script src="../functions/tooltip1.js?dummy=<? echo (rand());?>" language="javascript"></script>
+<script src="../functions/tooltip1.js?dummy=<?php echo (rand());?>" language="javascript"></script>
 
 <table width="950" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td class="pageheader"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="28"><? include("../inc/header1.php"); ?></td>
+        <td height="28"><?php include("../inc/header1.php"); ?></td>
       </tr>
       <tr>
         <td height="58" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -124,7 +124,7 @@ while($fetch6 = mysqli_fetch_array($result6))
             <td height="54"><table width="99%" border="0" align="center" cellpadding="2" cellspacing="0">
               <tr>
                 <td width="14%"><a href="http://lms.relyonsoft.net"><img src="../images/lms-logo.gif" alt="Lead Management Software" width="100" height="50" border="0" /></a></td>
-                <td width="86%"><? include("../inc/navigation.php"); ?></td>
+                <td width="86%"><?php include("../inc/navigation.php"); ?></td>
               </tr>
             </table></td>
           </tr>
@@ -166,7 +166,7 @@ while($fetch6 = mysqli_fetch_array($result6))
                       <table width="100%" border="0" cellspacing="0" cellpadding="6">
                         <tr>
                           <td width="101">Company Name:
-                            <input name="form_recid" type="hidden" id="form_recid" /><input name="cookie_usertype" type="hidden" id="cookie_usertype" value="<? echo($cookie_usertype); ?>" /></td>
+                            <input name="form_recid" type="hidden" id="form_recid" /><input name="cookie_usertype" type="hidden" id="cookie_usertype" value="<?php echo($cookie_usertype); ?>" /></td>
                           <td colspan="2"><input name="form_companyname" type="text" class="formfields" id="form_companyname" size="50" maxlength="50" /></td>
                           <td width="112">Contact person:</td>
                           <td width="362"><input name="form_name" type="text" class="formfields" id="form_name" size="50" maxlength="50" /></td>
@@ -178,7 +178,7 @@ while($fetch6 = mysqli_fetch_array($result6))
                         <tr>
                           <td>State:</td>
                           <td colspan="2"><select name="form_state" class="formfields" id="form_state" onchange="districtselect()">
-                              <? include('../inc/state.php')?>
+                              <?php include('../inc/state.php')?>
                           </select></td>
                           <td>District:</td>
                           <td><div id="districtdiv">
@@ -212,7 +212,7 @@ while($fetch6 = mysqli_fetch_array($result6))
                         <tr>
                           <td valign="top">Product Name:</td>
                           <td colspan="2" valign="top"><select name="form_product" class="formfields" id="form_product">
-                            <?
+                            <?php
 						echo($productselect);
 						?>
                           </select></td>
@@ -241,7 +241,7 @@ while($fetch6 = mysqli_fetch_array($result6))
                             <option value="Software Suggest PPC">Software Suggest PPC</option>
                             <option value="Social Media">Social Media</option>
                             <option value="RSD – Feedback Call">RSD – Feedback Call</option>
-                                  <? if($enteredbyuserid == 151)
+                                  <?php if($enteredbyuserid == 151)
                                          echo '<option value="Relyon Website">Relyon Website</option>';
                                       ?>
 
@@ -277,7 +277,7 @@ while($fetch6 = mysqli_fetch_array($result6))
                           
                             
                           <span>  <select name="form_dealer" class="formfields" id="form_dealer" style="display:none;width:200px"  onchange="ondealerselection()" >
-                              <?
+                              <?php
 						echo($dealerselect);
 						?>
                               </select> </span></div>                            </td>

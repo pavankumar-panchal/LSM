@@ -1,4 +1,4 @@
-<?
+<?php
 ##include Files. . ##
 include("../inc/ajax-referer-security.php");
 include("../functions/phpfunctions.php");

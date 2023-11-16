@@ -1,4 +1,4 @@
-<?
+<?php
 //  To display state
 $query = " select slno,statename from mca_stateidmapping order by statename";
 $result = runmysqlquery($query);

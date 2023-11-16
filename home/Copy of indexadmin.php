@@ -1,5 +1,6 @@
-<?
-
+<?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 include("../inc/checklogin.php");
 
 //Permission check for the page
@@ -12,10 +13,10 @@ if($cookie_usertype <> "Admin")
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>LMS | Admin Dashboard</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<? echo (rand());?>">
-<script src="../functions/jsfunctions.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script type="text/javascript" src="../functions/jquery.js?dummy=<? echo (rand());?>"></script>
-<script type="text/javascript" src="../functions/highcharts-new.js?dummy=<? echo (rand());?>"></script>
+<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand());?>">
+<script src="../functions/jsfunctions.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script type="text/javascript" src="../functions/jquery.js?dummy=<?php echo (rand());?>"></script>
+<script type="text/javascript" src="../functions/highcharts-new.js?dummy=<?php echo (rand());?>"></script>
 <script type="text/javascript" src="../functions/excanvas.compiled.js"></script>
 </head>
 <body onload="retrievedata()">
@@ -23,7 +24,7 @@ if($cookie_usertype <> "Admin")
   <tr>
     <td class="pageheader"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="28"><? include("../inc/header1.php"); ?></td>
+        <td height="28"><?php include("../inc/header1.php"); ?></td>
       </tr>
       <tr>
         <td height="58" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -34,7 +35,7 @@ if($cookie_usertype <> "Admin")
             <td height="54"><table width="99%" border="0" align="center" cellpadding="2" cellspacing="0">
               <tr>
                 <td width="14%"><a href="http://useradmin.relyonsoft.com"><img src="../images/lms-logo.gif" alt="Lead Management Software" width="100" height="50" border="0" /></a></td>
-                <td width="86%"><? include("../inc/navigation.php"); ?></td>
+                <td width="86%"><?php include("../inc/navigation.php"); ?></td>
               </tr>
             </table></td>
           </tr>
@@ -116,7 +117,7 @@ if($cookie_usertype <> "Admin")
         <td height="300" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="4" style="border:2px solid #CCCCCC">
           <tr>
             <td><div id="container" style="width: 800px; height: 300px; margin: 0 auto">
-            <script type="text/javascript" src="../functions/highchartadmin.js?dummy=<? echo (rand());?>"></script>
+            <script type="text/javascript" src="../functions/highchartadmin.js?dummy=<?php echo (rand());?>"></script>
             </div></td>
           </tr>
           <tr>

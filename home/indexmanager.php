@@ -1,4 +1,7 @@
-<?
+<?php
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
 include("../inc/checklogin.php");
 
 
@@ -92,10 +95,10 @@ else
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>LMS | Manager Dashboard</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<? echo (rand());?>">
-<script src="../functions/jsfunctions.js?dummy=<? echo (rand());?>" language="javascript"></script>
-<script type="text/javascript" src="../functions/jquery.js?dummy=<? echo (rand());?>"></script>
-<script type="text/javascript" src="../functions/highcharts-new.js?dummy=<? echo (rand());?>"></script>
+<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand());?>">
+<script src="../functions/jsfunctions.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script type="text/javascript" src="../functions/jquery.js?dummy=<?php echo (rand());?>"></script>
+<script type="text/javascript" src="../functions/highcharts-new.js?dummy=<?php echo (rand());?>"></script>
 <script type="text/javascript" src="../functions/excanvas.compiled.js"></script>
 <!--[if lt IE 7]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
@@ -103,12 +106,12 @@ else
 </head>
 <body onload="retrievedata()">
 <div style="left: -1000px; top: 597px; visibility: hidden;" id="dhtmltooltip">dummy</div>
-<script src="../functions/tooltip.js?dummy=<? echo (rand());?>" language="javascript"></script>
+<script src="../functions/tooltip.js?dummy=<?php echo (rand());?>" language="javascript"></script>
 <table width="950" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td class="pageheader"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="28"><? include("../inc/header1.php"); ?></td>
+        <td height="28"><?php include("../inc/header1.php"); ?></td>
       </tr>
       <tr>
         <td height="58" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -119,7 +122,7 @@ else
             <td height="54"><table width="99%" border="0" align="center" cellpadding="2" cellspacing="0">
               <tr>
                 <td width="14%"><a href="http://lms.relyonsoft.net"><img src="../images/lms-logo.gif" alt="Lead Management Software" width="100" height="50" border="0" /></a></td>
-                <td width="86%"><? include("../inc/navigation.php"); ?></td>
+                <td width="86%"><?php include("../inc/navigation.php"); ?></td>
               </tr>
             </table></td>
           </tr>
@@ -152,7 +155,7 @@ else
       <tr>
         <td height="300" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="4">
           <tr>
-            <td><strong><font style="font-size:16px" color="#0099CC">Welcome <? echo($mgrname); ?>!!</font></strong></td>
+            <td><strong><font style="font-size:16px" color="#0099CC">Welcome <?php echo($mgrname); ?>!!</font></strong></td>
           </tr>
           <tr>
             <td><table width="100%" border="0" cellspacing="0" cellpadding="2">
@@ -166,7 +169,7 @@ else
                               <td bgcolor="#0099CC"><strong><font color="#FFFFFF">Attention!!</font></strong></td>
                             </tr>
                             <tr>
-                              <td valign="top" class="dashboard-box"><? echo($attentionlist); ?> <br />                              </td>
+                              <td valign="top" class="dashboard-box"><?php echo($attentionlist); ?> <br />                              </td>
                             </tr>
                         </table></td>
                       </tr>
@@ -180,10 +183,10 @@ else
                         <tr>
                           <td width="100%" valign="top" style="border:solid 1px #999999"><table width="100%" border="0" cellspacing="0" cellpadding="2">
                               <tr>
-                                <td bgcolor="#0099CC"><strong><font color="#FFFFFF">Dealers assigned to <strong><? echo($mgrname); ?></strong></font></strong></td>
+                                <td bgcolor="#0099CC"><strong><font color="#FFFFFF">Dealers assigned to <strong><?php echo($mgrname); ?></strong></font></strong></td>
                               </tr>
                               <tr>
-                                <td height="20" valign="top" class="dashboard-box"><? echo($assigneddealerlist); ?><br />
+                                <td height="20" valign="top" class="dashboard-box"><?php echo($assigneddealerlist); ?><br />
                                 </td>
                               </tr>
                           </table></td>
@@ -198,10 +201,10 @@ else
                       <tr>
                         <td width="100%" valign="top" style="border:solid 1px #999999"><table width="100%" border="0" cellspacing="0" cellpadding="2">
                             <tr>
-                              <td bgcolor="#0099CC"><strong><font color="#FFFFFF">Regions Mapped under <strong><? echo($mgrname); ?></strong></font></strong></td>
+                              <td bgcolor="#0099CC"><strong><font color="#FFFFFF">Regions Mapped under <strong><?php echo($mgrname); ?></strong></font></strong></td>
                             </tr>
                             <tr>
-                              <td height="20" valign="top" class="dashboard-box"><? echo($mappinglist); ?><br />                              </td>
+                              <td height="20" valign="top" class="dashboard-box"><?php echo($mappinglist); ?><br />                              </td>
                             </tr>
                         </table></td>
                       </tr>
@@ -215,10 +218,10 @@ else
                           <td bgcolor="#0099CC"><strong><font color="#FFFFFF">User Profile</font></strong></td>
                         </tr>
                         <tr>
-                          <td valign="top" class="dashboard-box"><strong><font color="#0099CC"><? echo($mgrname); ?></font></strong><br />
-							<? echo($mgrlocation); ?><br />
-							Cell No: <? echo($mgrcell); ?><br />
-							Email: <? echo($mgremail); ?><br />                            </td>
+                          <td valign="top" class="dashboard-box"><strong><font color="#0099CC"><?php echo($mgrname); ?></font></strong><br />
+							<?php echo($mgrlocation); ?><br />
+							Cell No: <?php echo($mgrcell); ?><br />
+							Email: <?php echo($mgremail); ?><br />                            </td>
                         </tr>
                         <tr>
                           <td bgcolor="#0099CC"><strong><font color="#FFFFFF">Additional Links:</font></strong> </td>
@@ -296,7 +299,7 @@ else
               </tr>
         <tr>
           <td colspan="9"><div id="container" style="width: 800px; height: 300px; margin: 0 auto">
-              <script type="text/javascript" src="../functions/highchartmanager.js?dummy=<? echo (rand());?>"></script>
+              <script type="text/javascript" src="../functions/highchartmanager.js?dummy=<?php echo (rand());?>"></script>
             </div></td>
         </tr>
       </table></td>

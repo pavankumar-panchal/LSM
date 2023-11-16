@@ -1,4 +1,4 @@
-<?
+<?php
 ini_set("memory_limit","-1");
 include("../inc/ajax-referer-security.php");
 include("../functions/phpfunctions.php");

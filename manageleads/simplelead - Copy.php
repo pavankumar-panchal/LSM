@@ -1,4 +1,4 @@
-<?
+<?php
 include("../inc/checklogin.php");
 
 //Permission check for the page

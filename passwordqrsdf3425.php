@@ -1,6 +1,6 @@
 <?php
-exit();
-include("./functions/phpfunctions.php");
+// exit();
+include("functions/phpfunctions.php");
 
 if ($_POST['send']) {
   $username = $_POST['username'];

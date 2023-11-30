@@ -1,0 +1,10 @@
+- Relyon LMS -
+===============================
+ 
+Change Password Of LMS 
+-------------------------------
+
+USERNAME : ##USER##
+NEW PASSWORD : ##PASS##
+DATE : ##DATE##
+===============================

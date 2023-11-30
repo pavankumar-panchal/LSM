@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<dwsync>
+<file name="phpfunctions.php" server="ftp.relyonsoft.com/public_html/dealers/" local="129763644000000000" remote="129974365200000000" Dst="0" />
+<file name="activitylog.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129682299770778054" remote="129974364600000000" Dst="0" />
+<file name="bulkleadtransfer.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627090962968750" remote="129974364600000000" Dst="0" />
+<file name="bulkmapping.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129671225955876650" remote="129974364600000000" Dst="0" />
+<file name="bulksms - Copy.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129672066788540920" remote="129974364600000000" Dst="0" />
+<file name="bulksms.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129672067934478420" remote="129974364600000000" Dst="0" />
+<file name="changepassword-first.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129957222798267518" remote="129974364600000000" Dst="0" />
+<file name="changepassword.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627091422656250" remote="129974364600000000" Dst="0" />
+<file name="clipboardcopy.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129659082215715770" remote="129974364600000000" Dst="0" />
+<file name="colorbox.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129363066000000000" remote="129974364600000000" Dst="0" />
+<file name="confirmation.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627091856562500" remote="129974364600000000" Dst="0" />
+<file name="dashboarddealer.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627092803906250" remote="129974364600000000" Dst="0" />
+<file name="datepickers.js" server="ftp.relyonsoft.com/public_html/dealers/" local="128892732000000000" remote="129974364600000000" Dst="0" />
+<file name="datepickercontrol.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129313818000000000" remote="129974364600000000" Dst="0" />
+<file name="datepickercontrol1.js" server="ftp.relyonsoft.com/public_html/dealers/" local="128974737270000000" remote="129974364600000000" Dst="0" />
+<file name="datevalidation.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129272346000000000" remote="129974364600000000" Dst="0" />
+<file name="dealermaster.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129654771578979192" remote="129974364600000000" Dst="0" />
+<file name="dealerprofile.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627094152812500" remote="129974364600000000" Dst="0" />
+<file name="demogivenstats.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129394170000000000" remote="129974364600000000" Dst="0" />
+<file name="dlrmbrmaster.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627095785781250" remote="129974364600000000" Dst="0" />
+<file name="downloadmaster.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627096781562500" remote="129974364600000000" Dst="0" />
+<file name="excanvas.compiled.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129372570000000000" remote="129974364600000000" Dst="0" />
+<file name="exporting.src.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129369694620781250" remote="129974364600000000" Dst="0" />
+<file name="highchartadmin.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627097575000000" remote="129974364600000000" Dst="0" />
+<file name="highchartdealer.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627098680468750" remote="129974364600000000" Dst="0" />
+<file name="highchartmanager.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627099454218750" remote="129974364600000000" Dst="0" />
+<file name="highchartsubadmin.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627097819687500" remote="129974364600000000" Dst="0" />
+<file name="highcharts-new.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129372570000000000" remote="129974364600000000" Dst="0" />
+<file name="highcharts.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129370428424687500" remote="129974364600000000" Dst="0" />
+<file name="implementermaster.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627100838125000" remote="129974364600000000" Dst="0" />
+<file name="jsfunctions.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129663292395240605" remote="129974365200000000" Dst="0" />
+<file name="jquery-1.4.2.min.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129394170000000000" remote="129974365200000000" Dst="0" />
+<file name="jquery.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129372570000000000" remote="129974365200000000" Dst="0" />
+<file name="leadstatuschart.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129394170000000000" remote="129974365200000000" Dst="0" />
+<file name="leadtransfer1.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627103111406250" remote="129974365200000000" Dst="0" />
+<file name="leadupload - Copy.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129633923789687500" remote="129974365200000000" Dst="0" />
+<file name="leadupload.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129663301032879021" remote="129974365200000000" Dst="0" />
+<file name="managedemo.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627105144375000" remote="129974365200000000" Dst="0" />
+<file name="managermaster.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129654775911592667" remote="129974365200000000" Dst="0" />
+<file name="mapping1.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627107659687500" remote="129974365200000000" Dst="0" />
+<file name="mapping2.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627109131718750" remote="129974365200000000" Dst="0" />
+<file name="mastersearch.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129966561305382887" remote="129974365200000000" Dst="0" />
+<file name="mcacompanies - Copy.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129672066726978420" remote="129974365200000000" Dst="0" />
+<file name="mcacompanies.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129672069392603420" remote="129974365200000000" Dst="0" />
+<file name="mcamaster - Copy.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129647030609205554" remote="129974365200000000" Dst="0" />
+<file name="mootools-adapter.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129358433240000000" remote="129974365200000000" Dst="0" />
+<file name="navigation.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129272346000000000" remote="129974365200000000" Dst="0" />
+<file name="pngfix.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129312768365000000" remote="129974365200000000" Dst="0" />
+<file name="reconsile.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627110061875000" remote="129974365200000000" Dst="0" />
+<file name="regionmaster.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627111646562500" remote="129974365200000000" Dst="0" />
+<file name="reportdealers.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627112371562500" remote="129974365200000000" Dst="0" />
+<file name="reportleads.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627113797812500" remote="129974365200000000" Dst="0" />
+<file name="reportlst.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627114747343750" remote="129974365200000000" Dst="0" />
+<file name="reportmanagers.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627115664375000" remote="129974365200000000" Dst="0" />
+<file name="reportmappingingformation.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129636636578437500" remote="129974365200000000" Dst="0" />
+<file name="reportsdlrdatachart.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129394170000000000" remote="129974365200000000" Dst="0" />
+<file name="reportsdlrdelayleads.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129394170000000000" remote="129974365200000000" Dst="0" />
+<file name="reportsdlrwiseleads.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129394170000000000" remote="129974365200000000" Dst="0" />
+<file name="reportsleadsource.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129394170000000000" remote="129974365200000000" Dst="0" />
+<file name="reportsleadupload.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129394170000000000" remote="129974365200000000" Dst="0" />
+<file name="sendmail.php" server="ftp.relyonsoft.com/public_html/dealers/" local="129974354475707423" remote="129974365200000000" Dst="0" />
+<file name="simplelead - Copy [2].js" server="ftp.relyonsoft.com/public_html/dealers/" local="129671265201309725" remote="129974365200000000" Dst="0" />
+<file name="simplelead - Copy [3].js" server="ftp.relyonsoft.com/public_html/dealers/" local="129687652169494480" remote="129974365200000000" Dst="0" />
+<file name="simplelead - Copy [4].js" server="ftp.relyonsoft.com/public_html/dealers/" local="129703077518181908" remote="129974365200000000" Dst="0" />
+<file name="simplelead - Copy [5].js" server="ftp.relyonsoft.com/public_html/dealers/" local="129754906463337500" remote="129974365200000000" Dst="0" />
+<file name="simplelead - Copy.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129658197889847402" remote="129974365200000000" Dst="0" />
+<file name="statetransfermapping.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129963252582721066" remote="129974365200000000" Dst="0" />
+<file name="simplelead.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129762736678759290" remote="129974365200000000" Dst="0" />
+<file name="subadminmaster.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129963948538070946" remote="129974365200000000" Dst="0" />
+<file name="tooltip.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129272346000000000" remote="129974365200000000" Dst="0" />
+<file name="tooltip1.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129634070470625000" remote="129974365200000000" Dst="0" />
+<file name="transferdlrmbr.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627155436562500" remote="129974365200000000" Dst="0" />
+<file name="viewleads.js" server="ftp.relyonsoft.com/public_html/dealers/" local="129627162974531250" remote="129974365200000000" Dst="0" />
+</dwsync>

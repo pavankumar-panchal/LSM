@@ -1,4 +1,4 @@
-<?php
+<?
 
 ini_set('memory_limit', '2048M');
 include("../functions/phpfunctions.php");
@@ -256,7 +256,7 @@ if(lmsgetcookie('lmsusername') <> '' && lmsgetcookie('lmsusersort') <> '')
 		
 	// Insert logs Dealer List to excel
 	$query = "insert into lms_logs_event(userid,system,eventtype,eventdatetime) values('".$userslno."','".$_SERVER['REMOTE_ADDR']."','32','".datetimelocal("Y-m-d").' '.datetimelocal("H:i:s")."')";
-	$result = runmysqlquery_log($query);
+	$result = runmysqlquery($query);
 	
 	
 	

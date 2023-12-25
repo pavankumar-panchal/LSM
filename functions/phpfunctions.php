@@ -1,6 +1,6 @@
 <?php
 //Include Database Configuration details
-
+error_reporting(0);
 
 if (file_exists("../inc/dbconfig.php")) {
 	include("../inc/dbconfig.php");
@@ -12,7 +12,7 @@ if (file_exists("../inc/dbconfig.php")) {
 $newconnection = mysqli_connect($dbhost, $dbuser, $dbpwd, $dbname) or die("Cannot connect to Mysql server host");
 
 //Connect to log host
-$newconnection_log = mysqli_connect($dbhost_log, $dbuser_log, $dbpwd_log, $dbpwd_log) or die("Cannot connect to Mysql server host");
+$newconnection_log = mysqli_connect($dbhost_log, $dbuser_log, $dbpwd_log, $dbname_log) or die("Cannot connect to Mysql server host");
 
 /* -------------------- Get local server time [by adding 5.30 hours] -------------------- */
 function datetimelocal($format)

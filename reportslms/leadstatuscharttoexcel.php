@@ -1,13 +1,13 @@
-<?php
+<?
+
 ini_set('memory_limit', '2048M');
 include("../functions/phpfunctions.php");
 include("../inc/getuserslno.php");
 
 //PHPExcel
-require_once '../phpgeneration/PHPExcel.php';
-
-//PHPExcel_IOFactory
-require_once '../phpgeneration/PHPExcel/IOFactory.php';
+require_once '../vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 $fromdate = changedateformat($_POST['fromdate']);
 $todate = changedateformat($_POST['todate']);
@@ -43,7 +43,8 @@ switch($reporttype)
 		$result4 = runmysqlquery($query4);
 	
 	// Create new PHPExcel object
-	$objPHPExcel = new PHPExcel();
+	$objPHPExcel = new Spreadsheet();
+
 	
 	$pageindex = 0;
 	//Set Active Sheet	
@@ -129,8 +130,8 @@ switch($reporttype)
 	
 	//Define Style for content area
 	$styleArrayContent = array(
-						'borders' => array('allborders'=> array('style' => PHPExcel_Style_Border::BORDER_THIN))
-					);
+		'borders' => array('allBorders' => array('borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN))
+	);
 	
 	//Get the last cell reference
 	$highestRow = $mySheet->getHighestRow(); 
@@ -575,17 +576,20 @@ switch($reporttype)
 		$result4 = runmysqlquery($query4);
 		
 		// Create new PHPExcel object
-		$objPHPExcel = new PHPExcel();
+		$objPHPExcel = new Spreadsheet();
+
 		
 		$pageindex = 0;
 		//Set Active Sheet	
 		$mySheet = $objPHPExcel->getActiveSheet();
 		$mySheet->setTitle('All Products');
 		$styleArray = array(
-						'font' => array('bold' => true),
-						'fill'=> array('type'=> PHPExcel_Style_Fill::FILL_SOLID,'color'=> array('argb' => '0099CCFF')),
-						'borders' => array('allborders'=> array('style' => PHPExcel_Style_Border::BORDER_THIN))
-					);
+			'font' => array('bold' => true),
+			'fill' => array('fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'startColor' => array('argb' => '0099CCFF')),
+			'borders' => array('allBorders' => array('borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN))
+
+		);
+	
 		$mySheet->getStyle('A3:L3')->applyFromArray($styleArray);
 		$mySheet->mergeCells('A1:L1');
 		$mySheet->mergeCells('A2:L2');
@@ -662,8 +666,8 @@ switch($reporttype)
 		
 		//Define Style for content area
 		$styleArrayContent = array(
-							'borders' => array('allborders'=> array('style' => PHPExcel_Style_Border::BORDER_THIN))
-						);
+			'borders' => array('allBorders' => array('borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN))
+		);
 		
 		//Get the last cell reference
 		$highestRow = $mySheet->getHighestRow(); 
@@ -1094,7 +1098,7 @@ switch($reporttype)
 		
 	// Insert logs Manager List to excel
 		$query = "insert into lms_logs_event(userid,system,eventtype,eventdatetime) values('".$userslno."','".$_SERVER['REMOTE_ADDR']."','49','".datetimelocal("Y-m-d").' '.datetimelocal("H:i:s")."')";
-		$result = runmysqlquery_log($query);
+		$result = runmysqlquery($query);
 		
 		//Create a File name syntax
 		$date = datetimelocal('YmdHis');
@@ -1104,14 +1108,21 @@ switch($reporttype)
 		{
 			$filepath = $_SERVER['DOCUMENT_ROOT'].'/LMS/filescreated/'.$filebasename;
 			$downloadlink = 'http://'.$_SERVER['HTTP_HOST'].'/lms/filescreated/'.$filebasename;
+	
+	
+	
 		}
 		else
 		{
 			$filepath = $_SERVER['DOCUMENT_ROOT'].'/filescreated/'.$filebasename;
 			$downloadlink = 'http://'.$_SERVER['HTTP_HOST'].'/filescreated/'.$filebasename;
+
+	
+	
 		}
 	
-		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+		$objWriter = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($objPHPExcel, 'Xls');
+
 		$objWriter->save($filepath);		
 		$fp = fopen($filebasename,"wa+");
 		if($fp)

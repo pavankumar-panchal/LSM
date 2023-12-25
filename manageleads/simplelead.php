@@ -662,7 +662,7 @@ if($filteredtoexcel == 'yes')
                                                                   </tr>
                                                                   <tr>
                                                                     <td valign="top">Next Followup Date :</td>
-                                                                    <td width="34%" valign="top"><input name="followupdate" type="text" class="formfields" id="DPC_followupdate" size="20" maxlength="10" value=""  readonly="readonly"/></td>
+                                                                    <td width="34%" valign="top"><input name="followupdate" type="text" class="formfields" id="DPC_followupdate" size="20" maxlength="10" value="" readonly="readonly"/></td>
                                                                     <td width="34%" valign="top"><div align="center">
                                                                         <input style="height:20px" name="newfollowup" type="button" class="formbutton" id="newfollowup" value="New" onclick="newfollowup();" />
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -675,7 +675,8 @@ if($filteredtoexcel == 'yes')
                                                               <td height="20px" valign="top"><span id="followupmessage"></span></td>
                                                             </tr>
                                                             <tr>
-                                                              <td valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="1">
+                                                              <td valign="top">
+                                                                <table width="100%" border="0" cellspacing="0" cellpadding="1">
                                                                   <tr>
                                                                     <td><div id="smallgrid" class="grid-div-small1">
                                                                         <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#999999">
@@ -748,6 +749,7 @@ if($filteredtoexcel == 'yes')
                                                             </tr>
                                                           </table>
                                                         </div>
+
                                                         <div id="tabgroupgridc4" style="display:none;">
                                                           <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <input type="hidden" name="hiddenactivetype" id="hiddenactivetype"/>

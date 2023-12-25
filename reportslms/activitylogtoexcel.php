@@ -1,14 +1,14 @@
-<?php
+<?
 
 ini_set('memory_limit', '2048M');
 include("../functions/phpfunctions.php");
 include("../inc/getuserslno.php");
 
-//PHPExcel
-require_once '../phpgeneration/PHPExcel.php';
 
-//PHPExcel_IOFactory
-require_once '../phpgeneration/PHPExcel/IOFactory.php';
+require_once '../vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+
 if($cookie_usertype == "Admin")
 {
 	$cookie_username = lmsgetcookie('lmsusername');
@@ -62,18 +62,21 @@ where (left(lms_logs_event.eventdatetime,10) between '".$fromdate."' AND '".$tod
 				break;
 		}
 	
-	$result = runmysqlquery_log($query);
+	$result = runmysqlquery($query);
 	
 	// Create new PHPExcel object
-	$objPHPExcel = new PHPExcel();
+	$objPHPExcel = new Spreadsheet();
+
 	
 	//Set Active Sheet	
 	$mySheet = $objPHPExcel->getActiveSheet();
 	$styleArray = array(
-					'font' => array('bold' => true),
-					'fill'=> array('type'=> PHPExcel_Style_Fill::FILL_SOLID,'color'=> array('argb' => '0099CCFF')),
-					'borders' => array('allborders'=> array('style' => PHPExcel_Style_Border::BORDER_THIN))
-				);
+		'font' => array('bold' => true),
+		'fill' => array('fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'startColor' => array('argb' => '0099CCFF')),
+		'borders' => array('allBorders' => array('borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN))
+
+	);
+
 	$mySheet->getStyle('A3:G3')->applyFromArray($styleArray);	
 	//Merge the cell
 	$mySheet->mergeCells('A1:G1');
@@ -147,10 +150,9 @@ where (left(lms_logs_event.eventdatetime,10) between '".$fromdate."' AND '".$tod
 	}
 	
 //Define Style for content area
-	$styleArrayContent = array(
-						'borders' => array('allborders'=> array('style' => PHPExcel_Style_Border::BORDER_THIN))
-					);
-	
+$styleArrayContent = array(
+	'borders' => array('allBorders' => array('borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN))
+);
 	//Get the last cell reference
 	$highestRow = $mySheet->getHighestRow(); 
 	$highestColumn = $mySheet->getHighestColumn(); 
@@ -181,14 +183,19 @@ where (left(lms_logs_event.eventdatetime,10) between '".$fromdate."' AND '".$tod
 	{
 		$filepath = $_SERVER['DOCUMENT_ROOT'].'/LMS/filescreated/'.$filebasename;
 		$downloadlink = 'http://'.$_SERVER['HTTP_HOST'].'/lms/filescreated/'.$filebasename;
+	
+	
 	}
 	else
 	{
 		$filepath = $_SERVER['DOCUMENT_ROOT'].'/filescreated/'.$filebasename;
 		$downloadlink = 'http://'.$_SERVER['HTTP_HOST'].'/filescreated/'.$filebasename;
+	
+	
 	}
 	
-	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+	$objWriter = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($objPHPExcel, 'Xls');
+
 	$objWriter->save($filepath);					
 	$fp = fopen($filebasename,"wa+");
 	if($fp)

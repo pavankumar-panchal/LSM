@@ -1,14 +1,12 @@
-<?php
+<?
 
 ini_set('memory_limit', '2048M');
 include("../functions/phpfunctions.php");
 include("../inc/getuserslno.php");
 
-//PHPExcel
-require_once '../phpgeneration/PHPExcel.php';
-
-//PHPExcel_IOFactory
-require_once '../phpgeneration/PHPExcel/IOFactory.php';
+require_once '../vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 if(lmsgetcookie('lmsusername') <> '' && lmsgetcookie('lmsusersort') <> '')
 {
@@ -93,15 +91,18 @@ left join lms_users on lms_users.referenceid = dealers.id  where lms_users.usern
 	} //echo($query); exit;
 	$result = runmysqlquery($query);
 	
-	$objPHPExcel = new PHPExcel();
+	$objPHPExcel = new Spreadsheet();
+
 		
 	//Set Active Sheet	
 	$mySheet = $objPHPExcel->getActiveSheet();
 	$styleArray = array(
-					'font' => array('bold' => true),
-					'fill'=> array('type'=> PHPExcel_Style_Fill::FILL_SOLID,'color'=> array('argb' => '0099CCFF')),
-					'borders' => array('allborders'=> array('style' => PHPExcel_Style_Border::BORDER_THIN))
-				);
+		'font' => array('bold' => true),
+		'fill' => array('fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID, 'startColor' => array('argb' => '0099CCFF')),
+		'borders' => array('allBorders' => array('borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN))
+
+	);
+
 	//Apply style for header Row	
 	$mySheet->getStyle('A3:M3')->applyFromArray($styleArray);
 	
@@ -110,8 +111,11 @@ left join lms_users on lms_users.referenceid = dealers.id  where lms_users.usern
 	$mySheet->mergeCells('A2:M2');
 	
 	// To align the text to center.
-	$mySheet->getStyle('A1:M1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-	$mySheet->getStyle('A2:M2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	$mySheet->getStyle('A1:M1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+	$mySheet->getStyle('A2:M2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+	// $mySheet->getStyle('A1:M1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+	// $mySheet->getStyle('A2:M2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 	$objPHPExcel->setActiveSheetIndex(0)
 				->setCellValue('A1', 'Relyon Softech Limited, Bangalore')
 				->setCellValue('A2', 'Leads Alloted '.' '.$attachpiece);
@@ -159,9 +163,8 @@ left join lms_users on lms_users.referenceid = dealers.id  where lms_users.usern
 	
 	//Define Style for content area
 	$styleArrayContent = array(
-						'borders' => array('allborders'=> array('style' => PHPExcel_Style_Border::BORDER_THIN))
-					);
-	
+		'borders' => array('allBorders' => array('borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN))
+	);
 	//Get the last cell reference
 	$highestRow = $mySheet->getHighestRow(); 
 	$highestColumn = $mySheet->getHighestColumn(); 
@@ -193,22 +196,24 @@ left join lms_users on lms_users.referenceid = dealers.id  where lms_users.usern
 	$mySheet->getColumnDimension('M')->setWidth(25);	
 	
 	$query1 = "insert into lms_logs_event(userid,system,eventtype,eventdatetime) values('".$userslno."','".$_SERVER['REMOTE_ADDR']."','38','".datetimelocal("Y-m-d").' '.datetimelocal("H:i:s")."')";
-	$result1 = runmysqlquery_log($query1);
+	$result1 = runmysqlquery($query1);
 	
 	$filebasename = "LMS-DLRWISELEADS-".$cookie_username."-".$date.".xls";
 	
 	if($_SERVER['HTTP_HOST'] == 'meghanab')  
 	{
+		
 		$filepath = $_SERVER['DOCUMENT_ROOT'].'/LMS/filescreated/'.$filebasename;
 		$downloadlink = 'http://'.$_SERVER['HTTP_HOST'].'/lms/filescreated/'.$filebasename;	
 	}
 	else
 	{
+	
 		$filepath = $_SERVER['DOCUMENT_ROOT'].'/filescreated/'.$filebasename;
 		$downloadlink = 'http://'.$_SERVER['HTTP_HOST'].'/filescreated/'.$filebasename;
 	}
 	
-	$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+	$objWriter = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($objPHPExcel, 'Xls');
 
 	$objWriter->save($filepath);					
 

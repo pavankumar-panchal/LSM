@@ -3,69 +3,63 @@ include("../inc/checklogin.php");
 
 //Permission check for the page
 $showmcalistvalues = getshowmcapermissionvalue();
-$showmcalistvaluessplit = explode('^',$showmcalistvalues);
-if($showmcalistvaluessplit[0] <> 'yes')
-	header("Location:../home");
-	
+$showmcalistvaluessplit = explode('^', $showmcalistvalues);
+if ($showmcalistvaluessplit[0] <> 'yes')
+  header("Location:../home");
+
 
 //Select the list of dealers for whom lead can be uploaded.
-switch($cookie_usertype)
-{
-	case "Admin":
-		//$query = "SELECT id AS selectid, dlrcompanyname AS selectname FROM dealers ORDER BY dlrcompanyname";
-		$query = "SELECT distinct dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM dealers left join lms_users on lms_users.referenceid = dealers.id where lms_users.disablelogin <> 'yes' and lms_users.type = 'Dealer' ORDER BY dlrcompanyname;";
-		$result = runmysqlquery($query);
-		$dealerselect = '<option value="" selected="selected">- - -Make a Selection- - -</option>';
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$dealerselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].'</option>';
-		}
-		break;
-	case "Reporting Authority":
-		//$query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE lms_users.username = '".$cookie_username."' ORDER BY dealers.dlrcompanyname";
-		$query = "select dealers.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users left join dealers on dealers.id=lms_users.referenceid where dealers.managerid  in (select dealers.managerid from dealers left join lms_users on dealers.managerid =lms_users.referenceid where lms_users.username = '".$cookie_username."'and lms_users.type = 'Reporting Authority')
+switch ($cookie_usertype) {
+  case "Admin":
+    //$query = "SELECT id AS selectid, dlrcompanyname AS selectname FROM dealers ORDER BY dlrcompanyname";
+    $query = "SELECT distinct dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM dealers left join lms_users on lms_users.referenceid = dealers.id where lms_users.disablelogin <> 'yes' and lms_users.type = 'Dealer' ORDER BY dlrcompanyname;";
+    $result = runmysqlquery($query);
+    $dealerselect = '<option value="" selected="selected">- - -Make a Selection- - -</option>';
+    while ($fetch = mysqli_fetch_array($result)) {
+      $dealerselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . '</option>';
+    }
+    break;
+  case "Reporting Authority":
+    //$query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE lms_users.username = '".$cookie_username."' ORDER BY dealers.dlrcompanyname";
+    $query = "select dealers.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users left join dealers on dealers.id=lms_users.referenceid where dealers.managerid  in (select dealers.managerid from dealers left join lms_users on dealers.managerid =lms_users.referenceid where lms_users.username = '" . $cookie_username . "'and lms_users.type = 'Reporting Authority')
 and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY dealers.dlrcompanyname";
-		
-		if($cookie_username == "srinivasan")
-			//$query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE lms_users.username = '".$cookie_username."' or  lms_users.username = 'nagaraj' ORDER BY dealers.dlrcompanyname";
-			$query = "select dealers.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users  left join dealers on dealers.id =lms_users.referenceid where dealers.managerid  in (select dealers.managerid from dealers left join lms_users on dealers.managerid =lms_users.referenceid where lms_users.username = '".$cookie_username."'  or lms_users.username = 'nagaraj'and lms_users.type ='Reporting Authority') and lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY dealers.dlrcompanyname";
-		$result = runmysqlquery($query);
-		$dealerselect = '<option value="" selected="selected">- - -Make a Selection- - -</option>';
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$dealerselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].'</option>';
-		}
-		break;
-	case "Sub Admin":
-		//$query = "SELECT id AS selectid, dlrcompanyname AS selectname FROM dealers ORDER BY dlrcompanyname";
-		$query = "SELECT distinct dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM dealers left join lms_users on lms_users.referenceid = dealers.id where lms_users.disablelogin <> 'yes' and lms_users.type = 'Dealer' ORDER BY dlrcompanyname;";
-		$result = runmysqlquery($query);
-		$dealerselect = '<option value="" selected="selected">- - -Make a Selection- - -</option>';
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$dealerselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].'</option>';
-		}
-		break;
-	case "Dealer":
-		//$query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.id WHERE lms_users.username = '".$cookie_username."' ORDER BY dealers.dlrcompanyname";
-		
-		$query = "select dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM dealers LEFT JOIN lms_users ON lms_users.referenceid = dealers.id WHERE lms_users.username = '".$cookie_username."' AND lms_users.type = 'Dealer' AND disablelogin <> 'yes' ORDER BY dealers.dlrcompanyname;";
-		$result = runmysqlquery($query);
-		$dealerselect = '<option value="" selected="selected">- - -Make a Selection- - -</option>';
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$dealerselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].'</option>';
-		}
-		break;
-	case "Dealer Member":
-		$query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN lms_dlrmembers on lms_dlrmembers.dlrmbrid = lms_users.referenceid JOIN dealers ON lms_dlrmembers.dealerid = dealers.id WHERE lms_users.username = '".$cookie_username."' ORDER BY dealers.dlrcompanyname";
-		$result = runmysqlquery($query);
-		$dealerselect = '<option value="" selected="selected">- - -Make a Selection- - -</option>';
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$dealerselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].'</option>';
-		}
-		break;
+
+    if ($cookie_username == "srinivasan")
+      //$query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE lms_users.username = '".$cookie_username."' or  lms_users.username = 'nagaraj' ORDER BY dealers.dlrcompanyname";
+      $query = "select dealers.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users  left join dealers on dealers.id =lms_users.referenceid where dealers.managerid  in (select dealers.managerid from dealers left join lms_users on dealers.managerid =lms_users.referenceid where lms_users.username = '" . $cookie_username . "'  or lms_users.username = 'nagaraj'and lms_users.type ='Reporting Authority') and lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY dealers.dlrcompanyname";
+    $result = runmysqlquery($query);
+    $dealerselect = '<option value="" selected="selected">- - -Make a Selection- - -</option>';
+    while ($fetch = mysqli_fetch_array($result)) {
+      $dealerselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . '</option>';
+    }
+    break;
+  case "Sub Admin":
+    //$query = "SELECT id AS selectid, dlrcompanyname AS selectname FROM dealers ORDER BY dlrcompanyname";
+    $query = "SELECT distinct dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM dealers left join lms_users on lms_users.referenceid = dealers.id where lms_users.disablelogin <> 'yes' and lms_users.type = 'Dealer' ORDER BY dlrcompanyname;";
+    $result = runmysqlquery($query);
+    $dealerselect = '<option value="" selected="selected">- - -Make a Selection- - -</option>';
+    while ($fetch = mysqli_fetch_array($result)) {
+      $dealerselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . '</option>';
+    }
+    break;
+  case "Dealer":
+    //$query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.id WHERE lms_users.username = '".$cookie_username."' ORDER BY dealers.dlrcompanyname";
+
+    $query = "select dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM dealers LEFT JOIN lms_users ON lms_users.referenceid = dealers.id WHERE lms_users.username = '" . $cookie_username . "' AND lms_users.type = 'Dealer' AND disablelogin <> 'yes' ORDER BY dealers.dlrcompanyname;";
+    $result = runmysqlquery($query);
+    $dealerselect = '<option value="" selected="selected">- - -Make a Selection- - -</option>';
+    while ($fetch = mysqli_fetch_array($result)) {
+      $dealerselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . '</option>';
+    }
+    break;
+  case "Dealer Member":
+    $query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN lms_dlrmembers on lms_dlrmembers.dlrmbrid = lms_users.referenceid JOIN dealers ON lms_dlrmembers.dealerid = dealers.id WHERE lms_users.username = '" . $cookie_username . "' ORDER BY dealers.dlrcompanyname";
+    $result = runmysqlquery($query);
+    $dealerselect = '<option value="" selected="selected">- - -Make a Selection- - -</option>';
+    while ($fetch = mysqli_fetch_array($result)) {
+      $dealerselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . '</option>';
+    }
+    break;
 }
 
 ?>
@@ -75,13 +69,13 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>LMS | MCA Companies</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand());?>">
-<link media="screen" rel="stylesheet" href="../css/colorbox.css?dummy=<?php echo (rand());?>">
-<script src="../functions/jquery-1.4.2.min.js?dummy=<?php echo (rand());?>" language="javascript"></script>
-<script src="../functions/jsfunctions.js?dummy=<?php echo (rand());?>" language="javascript"></script>
-<script src="../functions/mcacompanies.js?dummy=<?php echo (rand());?>" language="javascript"></script>
-<script src="../functions/colorbox.js?dummy=<?php echo (rand());?>" language="javascript"></script>
-<script language="javascript" src="../functions/clipboardcopy.js?dummy=<?php echo (rand());?>"></script>
+<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand()); ?>">
+<link media="screen" rel="stylesheet" href="../css/colorbox.css?dummy=<?php echo (rand()); ?>">
+<script src="../functions/jquery-1.4.2.min.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
+<script src="../functions/jsfunctions.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
+<script src="../functions/mcacompanies.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
+<script src="../functions/colorbox.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
+<script language="javascript" src="../functions/clipboardcopy.js?dummy=<?php echo (rand()); ?>"></script>
 
 
 <!--[if lt IE 7]>
@@ -312,7 +306,7 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                           <td width="115" bgcolor="#FBFEFF"><strong>Company Name:
                             </strong>
                             <input name="lastslno" type="hidden" id="lastslno" />
-                            <input name="cookie_usertype" type="hidden" id="cookie_usertype" value="<?php echo($cookie_usertype); ?>" /></td>
+                            <input name="cookie_usertype" type="hidden" id="cookie_usertype" value="<?php echo ($cookie_usertype); ?>" /></td>
                           <td colspan="3" bgcolor="#FBFEFF"><font color="#FF0000"><strong><div id="form_companyname"></div></strong></font></td>
                         </tr>
                         <tr bgcolor="#F4FDFF">
@@ -415,7 +409,7 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                       <tr>
                         <td>State:</td>
                         <td><select name="state" class="formfields" id="state" onchange="districtselect()" style="width:325px">
-                              <?php include('../inc/state.php')?>
+                              <?php include('../inc/state.php') ?>
                           </select></td>
                         <td>STD code:</td>
                         <td><input name="stdcode" type="text" class="formfields" id="stdcode"  size="30" maxlength="6" autocomplete ="off"  /></td>
@@ -488,9 +482,9 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                           <td colspan="2" valign="top"><select name="form_product" class="formfields" id="form_product"  style="width:170px">
                            <option value="" selected="selected">- - -Make a Selection- - -</option>
                             <?php
-							
-						include('../inc/product.php');
-						?>
+
+                            include('../inc/product.php');
+                            ?>
                             </select></td>
                           <td width="88"><strong>Reference:</strong></td>
                           <td width="182"><select name="form_source" class="formfields" id="form_source"  style="width:170px">
@@ -526,8 +520,8 @@ and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY deal
                             
                           <span>  <select name="form_dealer" class="formfields" id="form_dealer" style="display:none;width:170px"   >
                               <?php
-						echo($dealerselect);
-						?>
+                              echo ($dealerselect);
+                              ?>
                               </select> </span></div>                            </td>
                           <td width="42" valign="middle"><div id="help" style=" display:none; padding-bottom:10px;" align="left"><img class="imageclass" onmouseout="hidetooltip()" onmouseover="generatedealertooltip()" src="../images/help-image.gif" /></div></td>
                           <td valign="top"><strong>Remarks:</strong></td>

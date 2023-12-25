@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-
-
-
 if ((lmsgetcookie('applicationid') == '8616153779973246153879') && (lmsgetcookie('sessionkind') <> false) && (lmsgetcookie('lmsusername') <> false) && (lmsgetcookie('lmsusersort') <> false) && (lmsgetcookie('lmslastlogindate') <> false)) {
 	$cookie_logintype = lmsgetcookie('sessionkind');
 	$cookie_username = lmsgetcookie('lmsusername');

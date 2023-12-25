@@ -627,6 +627,7 @@ function formsubmit(command)
 	}
 }
 
+
 function addfollowup()
 {
 	var form_recid = $("#form_recid");
@@ -681,6 +682,9 @@ function addfollowup()
 		}
 	});		
 }
+
+
+
 
 function showfollowups(leadid)
 {

@@ -1803,6 +1803,8 @@ function writeLayer(ID, parentID, sText)
 	}
 }
 
+
+
 //
-// Compartir es la única manera de perdurar
+// Compartir es la ï¿½nica manera de perdurar
 // EOF

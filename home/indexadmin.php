@@ -20,6 +20,7 @@ if($cookie_lastlogindate == "First Time")
 <script type="text/javascript" src="../functions/jquery.js?dummy=<?php echo (rand());?>"></script>
 <script type="text/javascript" src="../functions/highcharts-new.js?dummy=<?php echo (rand());?>"></script>
 <script type="text/javascript" src="../functions/excanvas.compiled.js"></script>
+
 </head>
 <body onload="retrievedata()">
 <table width="950" border="0" align="center" cellpadding="0" cellspacing="0">

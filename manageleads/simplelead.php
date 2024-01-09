@@ -2,133 +2,120 @@
 include("../inc/checklogin.php");
 
 //Permission check for the page
-if($cookie_usertype <> "Dealer" && $cookie_usertype <> "Sub Admin" && $cookie_usertype <> "Reporting Authority" && $cookie_usertype <> "Admin" && $cookie_usertype <> "Dealer Member")
-	header("Location:../home");
+if ($cookie_usertype <> "Dealer" && $cookie_usertype <> "Sub Admin" && $cookie_usertype <> "Reporting Authority" && $cookie_usertype <> "Admin" && $cookie_usertype <> "Dealer Member")
+  header("Location:../home");
 
 
 //Select the list of dealers for whom data can be filtered.
-switch($cookie_usertype)
-{
-	case "Admin":
-		$query = "SELECT id AS selectid, dlrcompanyname AS selectname FROM dealers ORDER BY dlrcompanyname";
-		break;
-	case "Reporting Authority":
-	//Check wheteher the manager is branch head or not
-		$query1 = "select lms_managers.branchhead as branchhead, lms_managers.branch as branch, lms_users.referenceid as  managerid from lms_users join lms_managers on lms_managers.id = lms_users.referenceid where lms_users.username = '".$cookie_username."' AND lms_users.type = 'Reporting Authority';";
-		$result1 = runmysqlqueryfetch($query1);
-					
-		if($result1['branchhead'] == 'yes')
-			$branchpiecejoin = "(dealers.branch = '".$result1['branch']."' OR dealers.managerid  = '".$result1['managerid']."')";
-		else
-			$branchpiecejoin = "lms_users.username = '".$cookie_username."' ";
-			
-		$query = "SELECT distinct dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE ".$branchpiecejoin." ORDER BY dealers.dlrcompanyname";
-		if($cookie_username == "srinivasan")
-		$query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE lms_users.username = '".$cookie_username."' or  lms_users.username = 'nagaraj' ORDER BY dealers.dlrcompanyname";
-		
-		break;
-	case "Dealer":
-		$query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.id WHERE lms_users.username = '".$cookie_username."' ORDER BY dealers.dlrcompanyname";
-		break;
-	case "Dealer Member":
-		$query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN lms_dlrmembers on lms_dlrmembers.dlrmbrid = lms_users.referenceid JOIN dealers ON lms_dlrmembers.dealerid = dealers.id WHERE lms_users.username = '".$cookie_username."' ORDER BY dealers.dlrcompanyname";
-		break;
-	case "Sub Admin":
-		$query = "SELECT id AS selectid, dlrcompanyname AS selectname FROM dealers ORDER BY dlrcompanyname";
-		break;
+switch ($cookie_usertype) {
+  case "Admin":
+    $query = "SELECT id AS selectid, dlrcompanyname AS selectname FROM dealers ORDER BY dlrcompanyname";
+    break;
+  case "Reporting Authority":
+    //Check wheteher the manager is branch head or not
+    $query1 = "select lms_managers.branchhead as branchhead, lms_managers.branch as branch, lms_users.referenceid as  managerid from lms_users join lms_managers on lms_managers.id = lms_users.referenceid where lms_users.username = '" . $cookie_username . "' AND lms_users.type = 'Reporting Authority';";
+    $result1 = runmysqlqueryfetch($query1);
+
+    if ($result1['branchhead'] == 'yes')
+      $branchpiecejoin = "(dealers.branch = '" . $result1['branch'] . "' OR dealers.managerid  = '" . $result1['managerid'] . "')";
+    else
+      $branchpiecejoin = "lms_users.username = '" . $cookie_username . "' ";
+
+    $query = "SELECT distinct dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE " . $branchpiecejoin . " ORDER BY dealers.dlrcompanyname";
+    if ($cookie_username == "srinivasan")
+      $query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE lms_users.username = '" . $cookie_username . "' or  lms_users.username = 'nagaraj' ORDER BY dealers.dlrcompanyname";
+
+    break;
+  case "Dealer":
+    $query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.id WHERE lms_users.username = '" . $cookie_username . "' ORDER BY dealers.dlrcompanyname";
+    break;
+  case "Dealer Member":
+    $query = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN lms_dlrmembers on lms_dlrmembers.dlrmbrid = lms_users.referenceid JOIN dealers ON lms_dlrmembers.dealerid = dealers.id WHERE lms_users.username = '" . $cookie_username . "' ORDER BY dealers.dlrcompanyname";
+    break;
+  case "Sub Admin":
+    $query = "SELECT id AS selectid, dlrcompanyname AS selectname FROM dealers ORDER BY dlrcompanyname";
+    break;
 }
 
 $result = runmysqlquery($query);
 $dealerselect = '';
-if(mysqli_num_rows($result) > 1)
-$dealerselect .= '<option value="" selected="selected">- - - - All - - - -</option>';
-while($fetch = mysqli_fetch_array($result))
-{
-	$dealerselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].'</option>';
+if (mysqli_num_rows($result) > 1)
+  $dealerselect .= '<option value="" selected="selected">- - - - All - - - -</option>';
+while ($fetch = mysqli_fetch_array($result)) {
+  $dealerselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . '</option>';
 }
 
 
 
-// Select dealer list to display in lead contract card.
-//if(($cookie_usertype == 'Admin') || ($cookie_usertype == 'Sub Admin') || ($cookie_usertype == 'Reporting Authority'))
-//{
-	switch($cookie_usertype)
-	{
-		case "Admin":
-		case "Sub Admin":
-			$query1 = "SELECT distinct dealers.id AS selectid, dealers.dlrcompanyname AS selectname 
+switch ($cookie_usertype) {
+  case "Admin":
+  case "Sub Admin":
+    $query1 = "SELECT distinct dealers.id AS selectid, dealers.dlrcompanyname AS selectname 
 	FROM dealers left join lms_users on lms_users.referenceid = dealers.id where lms_users.disablelogin <> 'yes' and lms_users.type = 'Dealer' ORDER BY dlrcompanyname;";
-			break;
-		case "Reporting Authority":
-		 //Check wheteher the manager is branch head or not
-			$query123 = "select lms_managers.branchhead as branchhead, lms_managers.branch as branch, lms_users.referenceid as  managerid from lms_users join lms_managers on lms_managers.id = lms_users.referenceid where lms_users.username = '".$cookie_username."' AND lms_users.type = 'Reporting Authority';";
-			$result1 = runmysqlqueryfetch($query123);
-			if($result1['branchhead'] == 'yes')
-			{
-				$branchpiecejoin = "AND (dealers.branch = '".$result1['branch']."' OR dealers.managerid  = '".$result1['managerid']."')";
-				$joinpiece = "";
-			}
-			else
-			{
-				$branchpiecejoin = "";
-				$joinpiece = "lms_users.username = '".$cookie_username."' AND ";
-			}
-				
-			$query1 = "select dealers.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users left join dealers on dealers.id=lms_users.referenceid where dealers.managerid  in (select dealers.managerid from dealers left join lms_users on dealers.managerid =lms_users.referenceid where  ".$joinpiece." lms_users.type = 'Reporting Authority')
-	and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ".$branchpiecejoin." ORDER BY dealers.dlrcompanyname";
-			if($cookie_username == "srinivasan")
-			$query1 = "select dealers.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users  left join dealers on dealers.id =lms_users.referenceid where dealers.managerid  in (select dealers.managerid from dealers left join lms_users on dealers.managerid =lms_users.referenceid where lms_users.username = '".$cookie_username."'  or lms_users.username = 'nagaraj'and lms_users.type ='Reporting Authority') and lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY dealers.dlrcompanyname";
-			break;	
-		case "Dealer":
-		$query1 = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.id WHERE lms_users.username = '".$cookie_username."' ORDER BY dealers.dlrcompanyname";
-		break;
-	    case "Dealer Member":
-		$query1 = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN lms_dlrmembers on lms_dlrmembers.dlrmbrid = lms_users.referenceid JOIN dealers ON lms_dlrmembers.dealerid = dealers.id WHERE lms_users.username = '".$cookie_username."' ORDER BY dealers.dlrcompanyname";
-		break;	
-			
-	}
-	$result1 = runmysqlquery($query1); //echo($query1);exit;
-	$dealerselect1 = '';
-	if(mysqli_num_rows($result) > 0)
-	$dealerselect1 .= '<option value="" selected="selected">- - - - Make A Selection - - - - </option>';
-	while($fetch1 = mysqli_fetch_array($result1))
-	{
-		$dealerselect1 .= '<option value="'.$fetch1['selectid'].'">'.$fetch1['selectname'].'</option>';
-	}
-	
-	if($cookie_usertype == 'Dealer Member')
-		$height = '369px';
-	else 
-		$height = '369px';
+    break;
+  case "Reporting Authority":
+    //Check wheteher the manager is branch head or not
+    $query123 = "select lms_managers.branchhead as branchhead, lms_managers.branch as branch, lms_users.referenceid as  managerid from lms_users join lms_managers on lms_managers.id = lms_users.referenceid where lms_users.username = '" . $cookie_username . "' AND lms_users.type = 'Reporting Authority';";
+    $result1 = runmysqlqueryfetch($query123);
+    if ($result1['branchhead'] == 'yes') {
+      $branchpiecejoin = "AND (dealers.branch = '" . $result1['branch'] . "' OR dealers.managerid  = '" . $result1['managerid'] . "')";
+      $joinpiece = "";
+    } else {
+      $branchpiecejoin = "";
+      $joinpiece = "lms_users.username = '" . $cookie_username . "' AND ";
+    }
+
+    $query1 = "select dealers.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users left join dealers on dealers.id=lms_users.referenceid where dealers.managerid  in (select dealers.managerid from dealers left join lms_users on dealers.managerid =lms_users.referenceid where  " . $joinpiece . " lms_users.type = 'Reporting Authority')
+	and  lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' " . $branchpiecejoin . " ORDER BY dealers.dlrcompanyname";
+    if ($cookie_username == "srinivasan")
+      $query1 = "select dealers.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users  left join dealers on dealers.id =lms_users.referenceid where dealers.managerid  in (select dealers.managerid from dealers left join lms_users on dealers.managerid =lms_users.referenceid where lms_users.username = '" . $cookie_username . "'  or lms_users.username = 'nagaraj'and lms_users.type ='Reporting Authority') and lms_users.type = 'Dealer' and lms_users.disablelogin <> 'yes' ORDER BY dealers.dlrcompanyname";
+    break;
+  case "Dealer":
+    $query1 = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.id WHERE lms_users.username = '" . $cookie_username . "' ORDER BY dealers.dlrcompanyname";
+    break;
+  case "Dealer Member":
+    $query1 = "SELECT dealers.id AS selectid, dealers.dlrcompanyname AS selectname FROM lms_users JOIN lms_dlrmembers on lms_dlrmembers.dlrmbrid = lms_users.referenceid JOIN dealers ON lms_dlrmembers.dealerid = dealers.id WHERE lms_users.username = '" . $cookie_username . "' ORDER BY dealers.dlrcompanyname";
+    break;
+
+}
+$result1 = runmysqlquery($query1); //echo($query1);exit;
+$dealerselect1 = '';
+if (mysqli_num_rows($result) > 0)
+  $dealerselect1 .= '<option value="" selected="selected">- - - - Make A Selection - - - - </option>';
+while ($fetch1 = mysqli_fetch_array($result1)) {
+  $dealerselect1 .= '<option value="' . $fetch1['selectid'] . '">' . $fetch1['selectname'] . '</option>';
+}
+
+if ($cookie_usertype == 'Dealer Member')
+  $height = '369px';
+else
+  $height = '369px';
 
 
 //Select the list of products and its groups for the drop-down
 $query3 = "SELECT id,productname FROM products ORDER BY productname";
 $result3 = runmysqlquery($query3);
 $productselect = '<option value="" selected="selected">- - - - All - - - -</option>';
-$productselect .='<optgroup label="Products" style = "font-family:"Times New Roman", Times, serif;">';
-while($fetch = mysqli_fetch_array($result3))
-{
-	$productselect .= '<option value="'.$fetch['id'].'">'.$fetch['productname'].'</option>';
+$productselect .= '<optgroup label="Products" style = "font-family:"Times New Roman", Times, serif;">';
+while ($fetch = mysqli_fetch_array($result3)) {
+  $productselect .= '<option value="' . $fetch['id'] . '">' . $fetch['productname'] . '</option>';
 }
-$productselect .='</optgroup>';
+$productselect .= '</optgroup>';
 $query4 = "SELECT distinct category  FROM products ORDER BY category";
 $result4 = runmysqlquery($query4);
-$productselect .='<optgroup label="Groups" style = "font-family:"Times New Roman", Times, serif;">';
-while($fetch = mysqli_fetch_array($result4))
-{
-	$productselect .= '<option value="'.$fetch['category'].'">'.$fetch['category'].'</option>';
+$productselect .= '<optgroup label="Groups" style = "font-family:"Times New Roman", Times, serif;">';
+while ($fetch = mysqli_fetch_array($result4)) {
+  $productselect .= '<option value="' . $fetch['category'] . '">' . $fetch['category'] . '</option>';
 }
-$productselect .='</optgroup>';
+$productselect .= '</optgroup>';
 
 
 // Select the list of products for product change list
 $query10 = "SELECT id,productname FROM products ORDER BY productname";
 $result10 = runmysqlquery($query10);
 $productchangeselect .= '<option value="" selected="selected">- - - - Make a Selection - - - -</option>';
-while($fetch = mysqli_fetch_array($result10))
-{
-	$productchangeselect .= '<option value="'.$fetch['id'].'">'.$fetch['productname'].'</option>';
+while ($fetch = mysqli_fetch_array($result10)) {
+  $productchangeselect .= '<option value="' . $fetch['id'] . '">' . $fetch['productname'] . '</option>';
 }
 $productchangeselect .= '</option>';
 
@@ -136,130 +123,117 @@ $productchangeselect .= '</option>';
 $query2 = "SELECT distinct leadstatus FROM leads ORDER BY leadstatus";
 $result2 = runmysqlquery($query2);
 $leadstatusselect = '<option value="" selected="selected">- - - - All - - - -</option>';
-while($fetch = mysqli_fetch_array($result2))
-{
-	$leadstatusselect .= '<option value="'.$fetch['leadstatus'].'">'.$fetch['leadstatus'].'</option>';
+while ($fetch = mysqli_fetch_array($result2)) {
+  $leadstatusselect .= '<option value="' . $fetch['leadstatus'] . '">' . $fetch['leadstatus'] . '</option>';
 }
 
 //Select the list of LEAD SUB STATUS for the drop-down
 $query3 = "SELECT distinct leadsubstatus FROM leads where leadsubstatus!='' ORDER BY leadsubstatus ";
 $result3 = runmysqlquery($query3);
 $leadsubstatusselect = '<option value="" selected="selected">- - - - All - - - -</option>';
-while($fetch3 = mysqli_fetch_array($result3))
-{
-	$leadsubstatusselect .= '<option value="'.$fetch3['leadsubstatus'].'">'.$fetch3['leadsubstatus'].'</option>';
+while ($fetch3 = mysqli_fetch_array($result3)) {
+  $leadsubstatusselect .= '<option value="' . $fetch3['leadsubstatus'] . '">' . $fetch3['leadsubstatus'] . '</option>';
 }
 
 // Select List to transfer Leads to dealer Members
 
 
 
-$query5 = "select lms_dlrmembers.dlrmbrid AS selectid, lms_dlrmembers.dlrmbrname AS selectname from lms_dlrmembers  left join lms_users on lms_users.referenceid =lms_dlrmembers.dlrmbrid where dealerid in (select dealers.id from dealers left join lms_users on lms_users.referenceid = dealers.id where lms_users.username = '".$cookie_username."' and lms_users.type = 'Dealer') and lms_users.disablelogin <> 'yes' and lms_users.type = 'Dealer Member'";
+$query5 = "select lms_dlrmembers.dlrmbrid AS selectid, lms_dlrmembers.dlrmbrname AS selectname from lms_dlrmembers  left join lms_users on lms_users.referenceid =lms_dlrmembers.dlrmbrid where dealerid in (select dealers.id from dealers left join lms_users on lms_users.referenceid = dealers.id where lms_users.username = '" . $cookie_username . "' and lms_users.type = 'Dealer') and lms_users.disablelogin <> 'yes' and lms_users.type = 'Dealer Member'";
 
 $result5 = runmysqlquery($query5);
 $count = mysqli_num_rows($result5);
-if($count > 0)
-{
-	$dlrmbrselect = '<option value = "" selected="selected"> - - - - Make A Selection - - - - </option>';
-	while($fetch5 = mysqli_fetch_array($result5))
-	{
-		$dlrmbrselect .= '<option value="'.$fetch5['selectid'].'">'.$fetch5['selectname'].'</option>';
-	}
-}	
-else
-	$dlrmbrselect = '<option value = "" selected="selected"> - - - - Make A Selection - - - - </option>';
+if ($count > 0) {
+  $dlrmbrselect = '<option value = "" selected="selected"> - - - - Make A Selection - - - - </option>';
+  while ($fetch5 = mysqli_fetch_array($result5)) {
+    $dlrmbrselect .= '<option value="' . $fetch5['selectid'] . '">' . $fetch5['selectname'] . '</option>';
+  }
+} else
+  $dlrmbrselect = '<option value = "" selected="selected"> - - - - Make A Selection - - - - </option>';
 
 
 // Get date for From date field.
 
-$month = date('m'); 
-if($month >= '04')
-   $date = '01-04-'.date('Y'); 
-else 
-{
-	$year = date('Y') - '1';
-	$date = '01-04-'.$year; //echo($date);
+$month = date('m');
+if ($month >= '04')
+  $date = '01-04-' . date('Y');
+else {
+  $year = date('Y') - '1';
+  $date = '01-04-' . $year; //echo($date);
 }
 
 //Get current date for TO DATE field
 $defaulttodate = datetimelocal("d-m-Y");
 
 //Get all the user names with respective displaynames, where they are allowed to upload a lead.
-switch($cookie_usertype)
-{
-	case "Admin":
-	case "Sub Admin":
-		$givenselect = '<option value="" selected="selected">- - - - All - - - -</option><option value="web">Web Downloads</option>';
-		// For Last Updated By(Removed Web Downlaods
-		$givenselect1 = '<option value="" selected="selected">- - - - All - - - -</option>';
-		//Add all Sub Admins
-		$query = "select lms_users.id AS selectid, lms_subadmins.sadname AS selectname from lms_users join lms_subadmins on lms_users.referenceid = lms_subadmins.id where lms_users.type = 'Sub Admin' ORDER BY selectname";
-		$result = runmysqlquery($query);
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$givenselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [S]</option>';
-			$givenselect1 .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [S]</option>';
-		}
-		//Add all Managers
-		$query = "select lms_users.id AS selectid, lms_managers.mgrname AS selectname from lms_users join lms_managers on lms_users.referenceid = lms_managers.id where lms_users.type = 'Reporting Authority' ORDER BY selectname";
-		$result = runmysqlquery($query);
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$givenselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [M]</option>';
-			$givenselect1 .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [M]</option>';
-		}
-		//Add all Dealers
-		$query = "select lms_users.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users join dealers on lms_users.referenceid = dealers.id where lms_users.type = 'Dealer' ORDER BY selectname";
-		$result = runmysqlquery($query);
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$givenselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [D]</option>';
-			$givenselect1 .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [D]</option>';
-		}
-		break;
+switch ($cookie_usertype) {
+  case "Admin":
+  case "Sub Admin":
+    $givenselect = '<option value="" selected="selected">- - - - All - - - -</option><option value="web">Web Downloads</option>';
+    // For Last Updated By(Removed Web Downlaods
+    $givenselect1 = '<option value="" selected="selected">- - - - All - - - -</option>';
+    //Add all Sub Admins
+    $query = "select lms_users.id AS selectid, lms_subadmins.sadname AS selectname from lms_users join lms_subadmins on lms_users.referenceid = lms_subadmins.id where lms_users.type = 'Sub Admin' ORDER BY selectname";
+    $result = runmysqlquery($query);
+    while ($fetch = mysqli_fetch_array($result)) {
+      $givenselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [S]</option>';
+      $givenselect1 .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [S]</option>';
+    }
+    //Add all Managers
+    $query = "select lms_users.id AS selectid, lms_managers.mgrname AS selectname from lms_users join lms_managers on lms_users.referenceid = lms_managers.id where lms_users.type = 'Reporting Authority' ORDER BY selectname";
+    $result = runmysqlquery($query);
+    while ($fetch = mysqli_fetch_array($result)) {
+      $givenselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [M]</option>';
+      $givenselect1 .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [M]</option>';
+    }
+    //Add all Dealers
+    $query = "select lms_users.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users join dealers on lms_users.referenceid = dealers.id where lms_users.type = 'Dealer' ORDER BY selectname";
+    $result = runmysqlquery($query);
+    while ($fetch = mysqli_fetch_array($result)) {
+      $givenselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [D]</option>';
+      $givenselect1 .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [D]</option>';
+    }
+    break;
 
-	case "Reporting Authority":
-		$givenselect = '<option value="" selected="selected">- - - - All - - - - </option><option value="web">Web Downloads</option>';
-		$givenselect1 = '<option value="" selected="selected">- - - - All - - - - </option>';
-		//Add respective manager name
-		$query = "select lms_users.id AS selectid, lms_managers.mgrname AS selectname from lms_users join lms_managers on lms_users.referenceid = lms_managers.id where lms_users.username = '".$cookie_username."'";
-		if($cookie_username == "srinivasan")
-			$query = "select lms_users.id AS selectid, lms_managers.mgrname AS selectname from lms_users join lms_managers on lms_users.referenceid = lms_managers.id where lms_users.username = '".$cookie_username."' or  lms_users.username = 'nagaraj'";
-		$result = runmysqlquery($query);
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$givenselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [M]</option>';
-			$givenselect1 .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [M]</option>';
-		}
-		//Add all the Dealers, who are under the manager logged in
-		$query = "select lms_users.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users join (SELECT dealers.id AS id, dealers.dlrcompanyname AS dlrcompanyname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE lms_users.username = '".$cookie_username."') AS dealers on lms_users.referenceid = dealers.id AND lms_users.type = 'Dealer' ORDER BY selectname";
-		if($cookie_username == "srinivasan")
-		$query = "select lms_users.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users join (SELECT dealers.id AS id, dealers.dlrcompanyname AS dlrcompanyname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE lms_users.username = '".$cookie_username."' or  lms_users.username = 'nagaraj') AS dealers on lms_users.referenceid = dealers.id AND lms_users.type = 'Dealer' ORDER BY selectname";
-		$result = runmysqlquery($query);
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$givenselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [D]</option>';
-			$givenselect1 .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [D]</option>';
-		}
-		break;
+  case "Reporting Authority":
+    $givenselect = '<option value="" selected="selected">- - - - All - - - - </option><option value="web">Web Downloads</option>';
+    $givenselect1 = '<option value="" selected="selected">- - - - All - - - - </option>';
+    //Add respective manager name
+    $query = "select lms_users.id AS selectid, lms_managers.mgrname AS selectname from lms_users join lms_managers on lms_users.referenceid = lms_managers.id where lms_users.username = '" . $cookie_username . "'";
+    if ($cookie_username == "srinivasan")
+      $query = "select lms_users.id AS selectid, lms_managers.mgrname AS selectname from lms_users join lms_managers on lms_users.referenceid = lms_managers.id where lms_users.username = '" . $cookie_username . "' or  lms_users.username = 'nagaraj'";
+    $result = runmysqlquery($query);
+    while ($fetch = mysqli_fetch_array($result)) {
+      $givenselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [M]</option>';
+      $givenselect1 .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [M]</option>';
+    }
+    //Add all the Dealers, who are under the manager logged in
+    $query = "select lms_users.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users join (SELECT dealers.id AS id, dealers.dlrcompanyname AS dlrcompanyname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE lms_users.username = '" . $cookie_username . "') AS dealers on lms_users.referenceid = dealers.id AND lms_users.type = 'Dealer' ORDER BY selectname";
+    if ($cookie_username == "srinivasan")
+      $query = "select lms_users.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users join (SELECT dealers.id AS id, dealers.dlrcompanyname AS dlrcompanyname FROM lms_users JOIN dealers ON lms_users.referenceid = dealers.managerid WHERE lms_users.username = '" . $cookie_username . "' or  lms_users.username = 'nagaraj') AS dealers on lms_users.referenceid = dealers.id AND lms_users.type = 'Dealer' ORDER BY selectname";
+    $result = runmysqlquery($query);
+    while ($fetch = mysqli_fetch_array($result)) {
+      $givenselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [D]</option>';
+      $givenselect1 .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [D]</option>';
+    }
+    break;
 
-	case "Dealer":
-		$givenselect = '<option value="" selected="selected">- - - - All - - - - </option><option value="web">Web Downloads</option>';
-		$givenselect1 = '<option value="" selected="selected">- - - - All - - - -</option>';
-		//Add respective Dealer name
-		$query = "select lms_users.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users join dealers on lms_users.referenceid = dealers.id where lms_users.username = '".$cookie_username."'";
-		$result = runmysqlquery($query);
-		while($fetch = mysqli_fetch_array($result))
-		{
-			$givenselect .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [D]</option>';
-			$givenselect1 .= '<option value="'.$fetch['selectid'].'">'.$fetch['selectname'].' [D]</option>';
-		}
-		break;
-		
-	case "Dealer Member":
-		$givenselect = '<option value="" selected="selected">- - - - All - - - -</option><option value="web">Web Downloads</option>';
-		$givenselect1 = '<option value="" selected="selected">- - - - All - - - -</option><option value="web">Web Downloads</option>';
-		break;
+  case "Dealer":
+    $givenselect = '<option value="" selected="selected">- - - - All - - - - </option><option value="web">Web Downloads</option>';
+    $givenselect1 = '<option value="" selected="selected">- - - - All - - - -</option>';
+    //Add respective Dealer name
+    $query = "select lms_users.id AS selectid, dealers.dlrcompanyname AS selectname from lms_users join dealers on lms_users.referenceid = dealers.id where lms_users.username = '" . $cookie_username . "'";
+    $result = runmysqlquery($query);
+    while ($fetch = mysqli_fetch_array($result)) {
+      $givenselect .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [D]</option>';
+      $givenselect1 .= '<option value="' . $fetch['selectid'] . '">' . $fetch['selectname'] . ' [D]</option>';
+    }
+    break;
+
+  case "Dealer Member":
+    $givenselect = '<option value="" selected="selected">- - - - All - - - -</option><option value="web">Web Downloads</option>';
+    $givenselect1 = '<option value="" selected="selected">- - - - All - - - -</option><option value="web">Web Downloads</option>';
+    break;
 }
 
 // For reference List
@@ -267,29 +241,29 @@ switch($cookie_usertype)
 $query6 = "select distinct refer from leads where refer <> '' order by refer";
 $result6 = runmysqlquery($query6);
 $referenceselect .= '<option value="" selected="selected">- - - All - - - </option>';
-while($fetch6 = mysqli_fetch_array($result6))
-{
-	$referenceselect .= '<option value="'.$fetch6['refer'].'">'.$fetch6['refer'].'</option>';
+while ($fetch6 = mysqli_fetch_array($result6)) {
+  $referenceselect .= '<option value="' . $fetch6['refer'] . '">' . $fetch6['refer'] . '</option>';
 }
-$query7 = "select filteredtoexcel from lms_users where username = '".$cookie_username."'";
+$query7 = "select filteredtoexcel from lms_users where username = '" . $cookie_username . "'";
 $result7 = runmysqlqueryfetch($query7);
 $filteredtoexcel = $result7['filteredtoexcel'];
-if($filteredtoexcel == 'yes')
-{
+if ($filteredtoexcel == 'yes') {
   $disabled = "";
-}else{$disabled = "disabled='disabled'";}
+} else {
+  $disabled = "disabled='disabled'";
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>LMS | Update</title>
-<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand());?>">
-<link type="text/css" rel="stylesheet" href="../css/datepickercontrol.css?dummy=<?php echo(rand());?>">
-<script src="../functions/jquery-1.4.2.min.js?dummy=<?php echo (rand());?>" language="javascript"></script>
-<script src="../functions/jsfunctions.js?dummy=<?php echo (rand());?>" language="javascript"></script>
-<script src="../functions/simplelead.js?dummy=<?php echo (rand());?>" language="javascript"></script>
-<script src="../functions/datepickercontrol.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="../css/style.css?dummy=<?php echo (rand()); ?>">
+<link type="text/css" rel="stylesheet" href="../css/datepickercontrol.css?dummy=<?php echo (rand()); ?>">
+<script src="../functions/jquery-1.4.2.min.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
+<script src="../functions/jsfunctions.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
+<script src="../functions/simplelead.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
+<script src="../functions/datepickercontrol.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
 <!--[if lt IE 7]>
 <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE7.js"></script>
 <![endif]-->
@@ -297,22 +271,22 @@ if($filteredtoexcel == 'yes')
 <script type="text/javascript">
     $(document).ready(function () {
 
-    	var textarea = $('#leadMeetRemarks');
-			textarea.hide();
+      var textarea = $('#leadMeetRemarks');
+      textarea.hide();
 
       var leadstatus = $('#form_subleadstatus');
-			leadstatus.hide();
+      leadstatus.hide();
 
         $('#form_leadstatus').change(function () {
            
-			      select   = $('#form_leadstatus').val();
-		        if (select == 'Requirement Does not Meet'){
-		          textarea.show();
-		        }
-		        else{
+            select   = $('#form_leadstatus').val();
+            if (select == 'Requirement Does not Meet'){
+              textarea.show();
+            }
+            else{
               textarea.val('');
-		          textarea.hide();
-		        }
+              textarea.hide();
+            }
 
            if (select == 'Not Interested'){
             leadstatus.show();
@@ -321,18 +295,18 @@ if($filteredtoexcel == 'yes')
             leadstatus.val('');
             leadstatus.hide();
            }
-		});
+    });
 
     $('#form_subleadstatus').change(function () {
            
             selectval   = $('#form_subleadstatus').val();
-		        if (selectval == 'Requirement does not match' || selectval == 'Other'){
-		          textarea.show();
-		        }
-		        else{
+            if (selectval == 'Requirement does not match' || selectval == 'Other'){
+              textarea.show();
+            }
+            else{
               textarea.val('');
-		          textarea.hide();
-		        }
+              textarea.hide();
+            }
    });
    
 
@@ -342,7 +316,7 @@ if($filteredtoexcel == 'yes')
 </head>
 <body onload="leadgridtab5('1','tabgroupleadgrid','default'),newtog(),updatestatusstrip();">
 <div style="left: -1000px; top: 597px; visibility: hidden;" id="dhtmltooltip1">dummy</div>
-<script src="../functions/tooltip1.js?dummy=<?php echo (rand());?>" language="javascript"></script>
+<script src="../functions/tooltip1.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
 <table width="950" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td class="pageheader"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -532,54 +506,55 @@ if($filteredtoexcel == 'yes')
                                                   </tr>
                                                    
                                                   
-                                                  <?php  if(($cookie_usertype == 'Admin') || ($cookie_usertype == 'Sub Admin') || ($cookie_usertype == 'Reporting Authority') || ($cookie_usertype == 'Dealer') || ($cookie_usertype == 'Dealer Member')) { ?>
-                                                  <tr height="20px">
-                                                    <td><strong>Dealer:
-                                                      <input type="hidden" name="hiddendealer" id="hiddendealer" />
-                                                      <input type="hidden" name="hiddentype" id="hiddentype" value = "<?php echo($cookie_usertype); ?>" />
-                                                      <input type="hidden" name="hiddendealertext" id="hiddendealertext" />
-                                                      </strong></td>
-                                                    <td><font color="#FF6600"><span id="dealer1" ></span></font></td>
-                                                     <td><span id="help1" style="display:none;"><img src="../images/help-image.gif"  onMouseover="tooltip('Dealer')" onMouseout="hidetooltip()"  class="imageclass"/></span></td>
-                                                   </tr>
-                                                  <tr >
-                                                    <td colspan="2" valign="top" height="25px"><div  id="link" align="center" style="display:none;" ><span  onclick="divopenclosefunction()" class="transferleadclass">Transfer this Lead >></span></div>
-                                                      <div id = "selectlist" style="display:none;" align="left"><strong>Transfer To:</strong>&nbsp;&nbsp;&nbsp;
-                                                        <select name="dealerlist1" id = "dealerlist1" style="width:180px">
-                                                            <?php echo($dealerselect1);?>
-                                                        </select>
+                                                  <?php if (($cookie_usertype == 'Admin') || ($cookie_usertype == 'Sub Admin') || ($cookie_usertype == 'Reporting Authority') || ($cookie_usertype == 'Dealer') || ($cookie_usertype == 'Dealer Member')) { ?>
+                                                              <tr height="20px">
+                                                                <td><strong>Dealer:
+                                                                  <input type="hidden" name="hiddendealer" id="hiddendealer" />
+                                                                  <input type="hidden" name="hiddentype" id="hiddentype" value = "<?php echo ($cookie_usertype); ?>" />
+                                                                  <input type="hidden" name="hiddendealertext" id="hiddendealertext" />
+                                                                  </strong></td>
+                                                                <td><font color="#FF6600"><span id="dealer1" ></span></font></td>
+                                                                 <td><span id="help1" style="display:none;"><img src="../images/help-image.gif"  onMouseover="tooltip('Dealer')" onMouseout="hidetooltip()"  class="imageclass"/></span></td>
+                                                               </tr>
+                                                              <tr >
+                                                                <td colspan="2" valign="top" height="25px"><div  id="link" align="center" style="display:none;" ><span  onclick="divopenclosefunction()" class="transferleadclass">Transfer this Lead >></span></div>
+                                                                  <div id = "selectlist" style="display:none;" align="left"><strong>Transfer To:</strong>&nbsp;&nbsp;&nbsp;
+                                                                    <select name="dealerlist1" id = "dealerlist1" style="width:180px">
+                                                                        <?php echo ($dealerselect1); ?>
+                                                                    </select>
                                                         
-                                                        &nbsp;&nbsp;<img src="../images/lmsreset-button.jpeg" onclick="resetlink('open')" class="imageclass"/>&nbsp;&nbsp;<img src="../images/lmsclose-button.jpeg" onclick="resetlink('close')" class="imageclass"/></div></td>
-                                                  </tr>
+                                                                    &nbsp;&nbsp;<img src="../images/lmsreset-button.jpeg" onclick="resetlink('open')" class="imageclass"/>&nbsp;&nbsp;<img src="../images/lmsclose-button.jpeg" onclick="resetlink('close')" class="imageclass"/></div></td>
+                                                              </tr>
                                                   
-                                                  <tr height="20px">
-                                                    <td><strong>Dealer Member:
-                                                      <input type="hidden" name="hiddendealer" id="hiddendealer" />
-                                                      <input type="hidden" name="hiddentype" id="hiddentype" value = "<?php echo($cookie_usertype); ?>" />
-                                                      <input type="hidden" name="hiddendealertext" id="hiddendealertext" />
-                                                      </strong></td>
-                                                    <td><font color="#FF6600"><span id="dealer2" ></span></font></td>
-                                                    <td><span id="help1" style="display:none;"><img src="../images/help-image.gif"  onMouseover="tooltip('Dealer')" onMouseout="hidetooltip()"  class="imageclass"/></span></td>
-                                                  </tr>
-                                                  <?php }if(($cookie_usertype == 'Dealer') && $userslno != '1069')  { ?>
-                                                  <tr >
-                                                    <td colspan="2" valign="top" height="25px"><div  id="link1" align="center" style="display:none;" ><span  onclick="divopenclosefunction()" class="transferleadclass">Assign this Lead >></span></div>
-                                                      <div id = "selectlist1" style="display:none;" align="left"><strong>Transfer To Sams:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <select name="dealermemberlist" id = "dealermemberlist" style=" width:180px">
-                                                            <?php echo($dlrmbrselect);?>
-                                                        </select>
-                                                        &nbsp;&nbsp;<img src="../images/lmsreset-button.jpeg" onclick="resetlink('open')" class="imageclass"/>&nbsp;&nbsp;<img src="../images/lmsclose-button.jpeg" onclick="resetlink('close')" class="imageclass"/></div></td>
-                                                  </tr>
-                                                  <?php } 
-                                                  if(($cookie_usertype == 'Dealer') && $userslno == '1069')  { ?>
-                                                  <tr >
-                                                    <td colspan="2" valign="top" height="25px"><div  id="link1" align="center" style="display:none;" ><span  onclick="divopenclosefunction()" class="transferleadclass">Assign this Lead >></span></div>
-                                                      <div id = "selectlist1" style="display:none;" align="left"><strong>Transfer To Sams:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <select name="dealermemberlist" id = "dealermemberlist" style=" width:180px">
-                                                            <?php include '../inc/lmsdealers.php' ;?>
-                                                        </select>
-                                                        &nbsp;&nbsp;<img src="../images/lmsreset-button.jpeg" onclick="resetlink('open')" class="imageclass"/>&nbsp;&nbsp;<img src="../images/lmsclose-button.jpeg" onclick="resetlink('close')" class="imageclass"/></div></td>
-                                                  </tr>
+                                                              <tr height="20px">
+                                                                <td><strong>Dealer Member:
+                                                                  <input type="hidden" name="hiddendealer" id="hiddendealer" />
+                                                                  <input type="hidden" name="hiddentype" id="hiddentype" value = "<?php echo ($cookie_usertype); ?>" />
+                                                                  <input type="hidden" name="hiddendealertext" id="hiddendealertext" />
+                                                                  </strong></td>
+                                                                <td><font color="#FF6600"><span id="dealer2" ></span></font></td>
+                                                                <td><span id="help1" style="display:none;"><img src="../images/help-image.gif"  onMouseover="tooltip('Dealer')" onMouseout="hidetooltip()"  class="imageclass"/></span></td>
+                                                              </tr>
+                                                  <?php }
+                                                  if (($cookie_usertype == 'Dealer') && $userslno != '1069') { ?>
+                                                              <tr >
+                                                                <td colspan="2" valign="top" height="25px"><div  id="link1" align="center" style="display:none;" ><span  onclick="divopenclosefunction()" class="transferleadclass">Assign this Lead >></span></div>
+                                                                  <div id = "selectlist1" style="display:none;" align="left"><strong>Transfer To Sams:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    <select name="dealermemberlist" id = "dealermemberlist" style=" width:180px">
+                                                                        <?php echo ($dlrmbrselect); ?>
+                                                                    </select>
+                                                                    &nbsp;&nbsp;<img src="../images/lmsreset-button.jpeg" onclick="resetlink('open')" class="imageclass"/>&nbsp;&nbsp;<img src="../images/lmsclose-button.jpeg" onclick="resetlink('close')" class="imageclass"/></div></td>
+                                                              </tr>
+                                                  <?php }
+                                                  if (($cookie_usertype == 'Dealer') && $userslno == '1069') { ?>
+                                                              <tr >
+                                                                <td colspan="2" valign="top" height="25px"><div  id="link1" align="center" style="display:none;" ><span  onclick="divopenclosefunction()" class="transferleadclass">Assign this Lead >></span></div>
+                                                                  <div id = "selectlist1" style="display:none;" align="left"><strong>Transfer To Sams:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                    <select name="dealermemberlist" id = "dealermemberlist" style=" width:180px">
+                                                                        <?php include '../inc/lmsdealers.php'; ?>
+                                                                    </select>
+                                                                    &nbsp;&nbsp;<img src="../images/lmsreset-button.jpeg" onclick="resetlink('open')" class="imageclass"/>&nbsp;&nbsp;<img src="../images/lmsclose-button.jpeg" onclick="resetlink('close')" class="imageclass"/></div></td>
+                                                              </tr>
                                                   <?php } ?>
                                                   <tr height="20px">
                                                     <td><strong>Manager:
@@ -607,10 +582,10 @@ if($filteredtoexcel == 'yes')
                                                               <input name="reset" type="button" value="Reset" class="formbutton" onclick="resetform();" />
                                                             </div></td>
                                                         </tr>
-                                                        <?php if($cookie_usertype == 'Dealer Member') { ?>
-                                                        <tr >
-                                                          <td colspan="2" valign="top" height="25px">&nbsp;</td>
-                                                        </tr>
+                                                        <?php if ($cookie_usertype == 'Dealer Member') { ?>
+                                                                    <tr >
+                                                                      <td colspan="2" valign="top" height="25px">&nbsp;</td>
+                                                                    </tr>
                                                         <?php } ?>
                                                       </table></td>
                                                   </tr>
@@ -661,14 +636,17 @@ if($filteredtoexcel == 'yes')
                                                                       <input type="hidden" name="hiddenactivetype" id="hiddenactivetype" value = "followup"/></td>
                                                                   </tr>
                                                                   <tr>
-                                                                    <td valign="top">Next Followup Date :</td>
-                                                                    <td width="34%" valign="top"><input name="followupdate" type="text" class="formfields" id="DPC_followupdate" size="20" maxlength="10" value="" readonly="readonly"/></td>
-                                                                    <td width="34%" valign="top"><div align="center">
-                                                                        <input style="height:20px" name="newfollowup" type="button" class="formbutton" id="newfollowup" value="New" onclick="newfollowup();" />
-                                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                        <input style="height:20px" name="addfollowup" type="button" class="formbutton" id="addfollowup" value="Add &gt;&gt;" onclick="addfollowup();" />
-                                                                      </div></td>
-                                                                  </tr>
+                                                                  <td valign="top">Next Followup Date:</td>
+                                                                   <td width="20%" valign="top">
+                                                               <input name="followupdate" type="text" class="formfields" id="DPC_followupdate" size="20" maxlength="10" value="08-01-2024" readonly="readonly"/></td>
+                                                               <td width="20%" valign="top">
+                                                              <div align="center" style="display: flex; justify-content: space-around;">
+                                                             <input type="time" name="followuptime" id="DPC_followuptime" class="formfields" />
+                                                             <input style="height: 20px; margin: 0 5px;" name="newfollowup" type="button" class="formbutton" id="newfollowup" value="New" onclick="newfollowup();" />
+                                                               <input style="height: 20px; margin: 0 5px;" name="addfollowup" type="button" class="formbutton" id="addfollowup" value="Add &gt;&gt;" onclick="addfollowup();" />
+                                                               </div>
+                                                               </td>
+                                                                </tr>
                                                                 </table></td>
                                                             </tr>
                                                             <tr>
@@ -681,11 +659,12 @@ if($filteredtoexcel == 'yes')
                                                                     <td><div id="smallgrid" class="grid-div-small1">
                                                                         <table width="100%" border="1" cellpadding="0" cellspacing="0" bordercolor="#999999">
                                                                           <tr class="gridheader">
-                                                                            <td width="9%">Sl No</td>
-                                                                            <td width="14%">Date</td>
-                                                                            <td width="37%">Remarks</td>
-                                                                            <td width="20%">Next Follow-up</td>
-                                                                            <td width="20%">Entered by</td>
+                                                                          <td width="5%">Sl No</td>
+                                                                          <td width="15%">Date</td>
+                                                                          <td width="25%">Remarks</td>
+                                                                          <td width="20%">Next Follow-up</td>
+                                                                          <td width="15%">Follow-up Time</td>
+                                                                          <td width="20%">Entered by</td>
                                                                           </tr>
                                                                         </table>
                                                                       </div></td>
@@ -852,8 +831,8 @@ if($filteredtoexcel == 'yes')
                                                               <td width="69%"><label>
                                                                 <select name="productchangeselect" id="productchangeselect" class="formfields1" style="border:1px solid #FF6666">
                                                                   <?php
-													  echo($productchangeselect);
-													  ?>
+                                                                  echo ($productchangeselect);
+                                                                  ?>
                                                                 </select>
                                                                 </label></td>
                                                             </tr>
@@ -896,7 +875,7 @@ if($filteredtoexcel == 'yes')
                                                               <td>&nbsp;</td>
                                                               <td height="25px"><div id="dealerlistdiv" style="display:none;">
                                                                   <select name="changeproductdealerlist" id="changeproductdealerlist" style="width:50%">
-                                                                    <?php echo($dealerselect1); ?>
+                                                                    <?php echo ($dealerselect1); ?>
                                                                   </select>
                                                                 </div></td>
                                                             </tr>
@@ -1018,7 +997,7 @@ if($filteredtoexcel == 'yes')
                                                           <tr>
                                                             <td width="84%"><textarea name="editleadremarks" id="editleadremarks" rows="2" class="formfields" style="padding:2px; width:260px; font-family:Arial, Helvetica, sans-serif; font-size:12px" ></textarea></td>
                                                             <td width="16%"><div><img src="../images/lmsreset-button.jpeg" onclick="closeopentxtbox('open')" class="imageclass"/></div>
- 
+
                                                               <div><img src="../images/lmsclose-button.jpeg" onclick="closeopentxtbox('close')" class="imageclass"/></div></td>
                                                           </tr>
                                                         </table>
@@ -1144,51 +1123,51 @@ if($filteredtoexcel == 'yes')
                               <td colspan="4"><table width="100%" border="0" cellspacing="0" cellpadding="4" style="border-bottom:1px solid #CCCCCC">
                                 <tr>
                                   <td width="11%">From Date : </td>
-                                  <td width="37%"><input name="fromdate" type="text" class="formfields" id="DPC_fromdate" size="20" maxlength="10" value="<?php echo($date); ?>"  style="width:50%" />
+                                  <td width="37%"><input name="fromdate" type="text" class="formfields" id="DPC_fromdate" size="20" maxlength="10" value="<?php echo ($date); ?>"  style="width:50%" />
                                     <input type="hidden" name="hiddenfromdate" id="hiddenfromdate" /></td>
                                   <td width="13%">To Date : </td>
-                                  <td width="39%"><input name="todate" type="text" class="formfields" id="DPC_todate" size="20" maxlength="10" value="<?php echo($defaulttodate); ?>" style="width:50%" />
+                                  <td width="39%"><input name="todate" type="text" class="formfields" id="DPC_todate" size="20" maxlength="10" value="<?php echo ($defaulttodate); ?>" style="width:50%" />
                                     <input type="hidden" name="hiddentodate" id="hiddentodate" /></td>
                                 </tr>
                                 <tr>
                                   <td>Product Name : </td>
                                   <td width="37%"><select name="productid" class="formfields" id="productid" style="width:50%">
-                                    <?php 
-						echo($productselect);
-						?>
+                                    <?php
+                                    echo ($productselect);
+                                    ?>
                                   </select>
                                     <input type="hidden" name="hiddenproductid" id="hiddenproductid" />
                                     <input type="hidden" name="hiddengrouplabel" id="hiddengrouplabel" /></td>
                                   <td width="13%">Dealer Name: </td>
                                   <td width="39%"><select name="dealerid" class="formfields" id="dealerid" style="width:50%">
-                                    <?php 
-						echo($dealerselect);
-						?>
+                                    <?php
+                                    echo ($dealerselect);
+                                    ?>
                                   </select>
                                     <input type="hidden" name="hiddendealerid" id="hiddendealerid" /></td>
                                 </tr>
                                 <tr>
                                   <td>Given By : </td>
                                   <td width="37%"><select name="givenby" class="formfields" id="givenby" style="width:50%">
-                                    <?php 
-						echo($givenselect);
-						?>
+                                    <?php
+                                    echo ($givenselect);
+                                    ?>
                                   </select>
                                     <input type="hidden" name="hiddengivenby1" id="hiddengivenby1" /></td>
                                   <td width="13%">Status of Lead :</td>
                                   <td width="39%"><select name="leadstatus" class="formfields" id="leadstatus" style="width:50%">
-                                    <?php 
-						echo($leadstatusselect);
-						?>
+                                    <?php
+                                    echo ($leadstatusselect);
+                                    ?>
                                   </select>
                                     <input type="hidden" name="hiddenleadstatus" id="hiddenleadstatus" /></td>
                                     </tr><tr>
                                     <td width="13%">Sub Status of Lead :</td>
                                   <td width="39%">
                                     <select name="leadsubstatus" class="formfields" id="leadsubstatus" style="width:50%">
-                                    <?php 
-						echo($leadsubstatusselect);
-						?>
+                                    <?php
+                                    echo ($leadsubstatusselect);
+                                    ?>
                                   </select>
                                     <input type="hidden" name="hiddenleadsubstatus" id="hiddenleadsubstatus" /></td>
                                 </tr>
@@ -1197,7 +1176,7 @@ if($filteredtoexcel == 'yes')
                                     <label for="dropterminatedstatus">Do not consider Order Closed / Fake / Exsting Users / Not Interested</label></td>
                                   <td>Lead Source:</td>
                                   <td><select name="form_source" class="formfields" id="form_source" style="width:50%">
-                                    <?php echo($referenceselect);?>
+                                    <?php echo ($referenceselect); ?>
                                   </select>
                                     <input type="hidden" name="hiddensource" id="hiddensource" /></td>
                                 </tr>
@@ -1226,19 +1205,19 @@ if($filteredtoexcel == 'yes')
                               <td colspan="4"><table width="100%" border="0" cellspacing="0" cellpadding="4">
                                 <tr>
                                   <td width="11%">From Date : </td>
-                                  <td width="37%"><input name="filter_followupdate1" type="text" class="formfields" id="DPC_filter_followupdate1" size="20" maxlength="10" value="<?php echo($defaulttodate); ?>" disabled="disabled" style="width:50%" />
+                                  <td width="37%"><input name="filter_followupdate1" type="text" class="formfields" id="DPC_filter_followupdate1" size="20" maxlength="10" value="<?php echo ($defaulttodate); ?>" disabled="disabled" style="width:50%" />
                                     <input name="filter_followupdate1hdn" type="hidden" class="formfields" id="filter_followupdate1hdn" value="" /></td>
 
                                   <td width="13%">To Date : </td>
-                                  <td width="39%"><input name="filter_followupdate2" type="text" class="formfields" id="DPC_filter_followupdate2" size="20" maxlength="10" value="<?php echo($defaulttodate); ?>" disabled="disabled"  style="width:50%" />
+                                  <td width="39%"><input name="filter_followupdate2" type="text" class="formfields" id="DPC_filter_followupdate2" size="20" maxlength="10" value="<?php echo ($defaulttodate); ?>" disabled="disabled"  style="width:50%" />
                                     <input name="filter_followupdate2hdn" type="hidden" class="formfields" id="filter_followupdate2hdn" value="" /></td>
                                 </tr>
                                 <tr>
                                   <td>Entered By :</td>
                                   <td><select name="followedby" id="followedby" style="width:50%" disabled="disabled">
-                                    <?php 
-						echo($givenselect1);
-						?>
+                                    <?php
+                                    echo ($givenselect1);
+                                    ?>
                                   </select>
                                     <input name="followedbyhidden" id = "followedbyhidden" type="hidden" /></td>
                                   <td>Remarks :</td>
@@ -1251,7 +1230,7 @@ if($filteredtoexcel == 'yes')
                               <td colspan="2"><div align="center">
                                 <input name="view" type="button" class="formbutton" id="view" value="Show" onclick="filtering('view');" />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <input name="excel" type="button" class="formbutton" id="excel" value="To Excel" onclick="filtering('excel');" <?php echo $disabled;?> />
+                                <input name="excel" type="button" class="formbutton" id="excel" value="To Excel" onclick="filtering('excel');" <?php echo $disabled; ?> />
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <input name="excel" type="button" class="formbutton" id="resetform" value="Reset" onclick="filtering('resetform');" />
                               </div></td>

@@ -2,6 +2,29 @@
 
 /*********************************************************************************************************/
 // Menu Dropdowns
+// --------
+function executeReminder() {
+    var xmlhttp = new XMLHttpRequest();
+  
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === XMLHttpRequest.DONE) {
+            if (xmlhttp.status === 200) {
+                // Handle the response here if needed
+            }
+        }
+    };
+  
+    xmlhttp.open("POST", "../inc/navigation.php", true);
+    xmlhttp.send();
+}
+
+// Call the function initially
+executeReminder();
+
+// Set interval to execute the function every 30 seconds
+setInterval(executeReminder, 30000); // 30 seconds
+
+//---------
 
 initNav = function() {
 		var navRoot = document.getElementById("primary-navigation");

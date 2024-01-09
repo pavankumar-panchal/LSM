@@ -240,14 +240,14 @@ if (lmsgetcookie('lmsusername') <> '' && lmsgetcookie('lmsusersort') <> '') {
 
 	$filebasename = "LMS-DLRS-" . $cookie_username . "-" . $date . ".xls";
 	if ($_SERVER['HTTP_HOST'] == 'meghanab') {
-		$filepath = $_SERVER['DOCUMENT_ROOT'].'/LMS/filescreated/'.$filebasename;
+		$filepath = $_SERVER['DOCUMENT_ROOT'].'/lms/filescreated/'.$filebasename;
 		$downloadlink = 'http://'.$_SERVER['HTTP_HOST'].'/lms/filescreated/'.$filebasename;
 
 		
 
 	} else {
-		$filepath = $_SERVER['DOCUMENT_ROOT'].'/filescreated/'.$filebasename;
-		$downloadlink = 'http://'.$_SERVER['HTTP_HOST'].'/filescreated/'.$filebasename;
+		$filepath = $_SERVER['DOCUMENT_ROOT'].'/lms/'.$filebasename;
+		$downloadlink = 'http://'.$_SERVER['HTTP_HOST'].'/lms/'.$filebasename;
 		
 	}
 

@@ -1,13 +1,13 @@
 <?php
+
 include("../inc/checklogin.php");
 
 //Permission check for the page
 if ($cookie_usertype <> "Dealer" && $cookie_usertype <> "Sub Admin" && $cookie_usertype <> "Reporting Authority" && $cookie_usertype <> "Admin" && $cookie_usertype <> "Dealer Member")
   header("Location:../home");
 
-
 //Select the list of dealers for whom data can be filtered.
-switch ($cookie_usertype) {
+switch ($cookie_usertype) { 
   case "Admin":
     $query = "SELECT id AS selectid, dlrcompanyname AS selectname FROM dealers ORDER BY dlrcompanyname";
     break;
@@ -90,8 +90,6 @@ if ($cookie_usertype == 'Dealer Member')
   $height = '369px';
 else
   $height = '369px';
-
-
 //Select the list of products and its groups for the drop-down
 $query3 = "SELECT id,productname FROM products ORDER BY productname";
 $result3 = runmysqlquery($query3);
@@ -638,7 +636,7 @@ if ($filteredtoexcel == 'yes') {
                                                                   <tr>
                                                                   <td valign="top">Next Followup Date:</td>
                                                                    <td width="20%" valign="top">
-                                                               <input name="followupdate" type="text" class="formfields" id="DPC_followupdate" size="20" maxlength="10" value="08-01-2024" readonly="readonly"/></td>
+                                                               <input name="followupdate" type="text" class="formfields" id="DPC_followupdate" size="20" maxlength="10" value="22-01-2024" readonly="readonly"/></td>
                                                                <td width="20%" valign="top">
                                                               <div align="center" style="display: flex; justify-content: space-around;">
                                                              <input type="time" name="followuptime" id="DPC_followuptime" class="formfields" />
@@ -733,7 +731,8 @@ if ($filteredtoexcel == 'yes') {
                                                           <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                             <input type="hidden" name="hiddenactivetype" id="hiddenactivetype"/>
                                                             <tr>
-                                                              <td colspan="3" ><div id="tabgroupgridc14" style="overflow:auto; height:310px; width:550px" align="center">
+                                                              <td colspan="3" >
+                                                                <div id="tabgroupgridc14" style="overflow:auto; height:310px; width:550px" align="center">
                                                                   <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                                     <tr>
                                                                       <td><div id="tabgroupgridc1_4" align="center">
@@ -1306,7 +1305,6 @@ if ($filteredtoexcel == 'yes') {
                                   <td class="tdborderlead">&nbsp;Lead Id</td>
                                   <td class="tdborderlead">&nbsp;Lead Date</td>
                                   <td class="tdborderlead">&nbsp;Product</td>
-                                  <td class="tdborderlead">&nbsp;Product</td>
                                   <td class="tdborderlead">&nbsp;Company</td>
                                   <td class="tdborderlead">&nbsp;Contact</td>
                                   <td class="tdborderlead">&nbsp;Landline</td>
@@ -1327,6 +1325,7 @@ if ($filteredtoexcel == 'yes') {
                     </div>
                     <div id="resultgridnv1" style="overflow:auto; display:none; height:150px; width:700px;" align="center">&nbsp;</div></td>
                 </tr>
+
               </table>
             </div>
             <div id="tabgroupleadgridc3" style="display:none;">
@@ -1478,3 +1477,4 @@ if ($filteredtoexcel == 'yes') {
 </table>
 </body>
 </html>
+

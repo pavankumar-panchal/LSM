@@ -1315,7 +1315,8 @@ if($filteredtoexcel == 'yes')
                   <td width="86%" align="left"><div id="followupsduetoexcel" align="left">( <a style="cursor:pointer;" onclick="gridtoexcel('notviewed')" class="headerclass"><strong>Export to Excel</strong></a> )</div></td>
                 </tr>
                 <tr>
-                  <td colspan="3" ><div id="tabgroupgridnv1" style="overflow:auto; height:260px; width:945px" align="center">
+                  <td colspan="3" >
+                    <div id="tabgroupgridnv1" style="overflow:auto; height:260px; width:945px" align="center">
                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                           <td><div id="tabgroupgridnv1_1" align="center">

@@ -46,7 +46,7 @@ function getmynumber() {
   var passdata =
     "&submittype=getcontactnumber&dummy=" +
     Math.floor(Math.random() * 100032680100);
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext80 = $.ajax({
     type: "POST",
     url: queryString,
@@ -126,7 +126,7 @@ function griddata(startlimit) {
   $("#form_leadstatus").val("");
   var passdata =
     "&submittype=griddata&dummy=" + Math.floor(Math.random() * 100032680100);
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext55 = $.ajax({
     type: "POST",
     url: queryString,
@@ -142,17 +142,17 @@ function griddata(startlimit) {
           $("#tabgroupgridc1_1").html(response1[1]);
           $("#getmorelink").html(response1[2]);
           $("#gridprocess").html(
-            '<font color="#FFFFFF"><strong>&nbsp; List of Leads => [Leads of Last 2 Days (' +
-              response1[3] +
-              " Records)] </strong></font>"
+            // '<font color="#FFFFFF"><strong>&nbsp; List of Leads => [Leads of Last 2 Days (' +
+            //   response1[3] +
+            //   " Records)] </strong></font>"
           );
         } else if (response1[0] == "2") {
           $("#tabgroupgridc1_1").html(response1[1]);
           $("#getmorelink").html(response1[2]);
           $("#gridprocess").html(
-            '<font color="#FFFFFF"><strong>&nbsp; List of Leads => [Leads of Last 2 Days (' +
-              response1[3] +
-              " Records)]</strong></font>"
+            // '<font color="#FFFFFF"><strong>&nbsp; List of Leads => [Leads of Last 2 Days (' +
+            //   response1[3] +
+            //   " Records)]</strong></font>"
           );
         } else {
           $("#gridprocess").html(scripterror1());
@@ -339,7 +339,7 @@ function filtering(command) {
       remarks.val() +
       "&dummy=" +
       Math.floor(Math.random() * 10230000000); //alert(passdata);
-    var queryString = "../ajax/simplelead.php";
+    var queryString = "../ajax/indextable.php";
     ajaxobjext56 = $.ajax({
       type: "POST",
       url: queryString,
@@ -404,7 +404,7 @@ function gridtoform(id) {
     id +
     "&dummy=" +
     Math.floor(Math.random() * 100032680100); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext59 = $.ajax({
     type: "POST",
     url: queryString,
@@ -663,7 +663,7 @@ function formsubmit(command) {
       "&dummy=" +
       Math.floor(Math.random() * 10230000000); //alert(passdata)
     //alert(passdata);
-    var queryString = "../ajax/simplelead.php";
+    var queryString = "../ajax/indextable.php";
     ajaxobjext60 = $.ajax({
       type: "POST",
       url: queryString,
@@ -739,7 +739,7 @@ function addfollowup() {
     "&dummy=" +
 
     Math.floor(Math.random() * 10230000000);
-  queryString = "../ajax/simplelead.php";
+  queryString = "../ajax/indextable.php";
   ajaxobjext61 = $.ajax({
     type: "POST",
     url: queryString,
@@ -776,7 +776,7 @@ function showfollowups(leadid) {
     leadid +
     "&dummy=" +
     Math.floor(Math.random() * 100032680100);
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext62 = $.ajax({
     type: "POST",
     url: queryString,
@@ -810,7 +810,7 @@ function followuptoform(followupid) {
     followupid +
     "&dummy=" +
     Math.floor(Math.random() * 100032680100);
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
 
   $.ajax({
     type: "POST",
@@ -853,7 +853,7 @@ function followuptoform(followupid) {
     followupid +
     "&dummy=" +
     Math.floor(Math.random() * 100032680100);
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext63 = $.ajax({
     type: "POST",
     url: queryString,
@@ -952,7 +952,7 @@ function getmorerecords(startlimit, slnocount, showtype, type) {
       slnocount +
       "&showtype=" +
       showtype; //alert(passdata)
-    var queryString = "../ajax/simplelead.php"; //alert(passdata);
+    var queryString = "../ajax/indextable.php"; //alert(passdata);
     ajaxobjext57 = $.ajax({
       type: "POST",
       url: queryString,
@@ -1053,7 +1053,7 @@ function getmorerecords(startlimit, slnocount, showtype, type) {
       "&dummy=" +
       Math.floor(Math.random() * 10230000000);
 
-    var queryString = "../ajax/simplelead.php"; //alert(passdata);
+    var queryString = "../ajax/indextable.php"; //alert(passdata);
     ajaxobjext58 = $.ajax({
       type: "POST",
       url: queryString,
@@ -1189,7 +1189,7 @@ function updatedata() {
         emailid.val() +
         "&dummy=" +
         Math.floor(Math.random() * 10230000000); //alert(passdata);
-      var queryString = "../ajax/simplelead.php";
+      var queryString = "../ajax/indextable.php";
       ajaxobjext59 = $.ajax({
         type: "POST",
         url: queryString,
@@ -1300,7 +1300,7 @@ function gridtab5(activetab, groupname, activetype) {
 
 function tabgridcontent(referencetablename, contentdiv) {
   var id = $("#hiddenid").val(); //alert(id);
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   if (id != "") {
     if (referencetablename == "updatelogs") {
       $("#tabgroupgridc1_2").html(processing());
@@ -1398,7 +1398,7 @@ function getmorerecords2(startlimit, slnocount, showtype) {
     id +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext61 = $.ajax({
     type: "POST",
     url: queryString,
@@ -1449,7 +1449,7 @@ function getmorerecords3(startlimit, slnocount, showtype) {
     id +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext62 = $.ajax({
     type: "POST",
     url: queryString,
@@ -1515,6 +1515,36 @@ function leadgridtab5(activetab, groupname, activetype) {
   }
 }
 
+
+
+
+
+function leadgridtab5(activetab, groupname, activetype) {
+  var totaltabs = 5;
+  var activetabclass = "grid-active-leadtabclass";
+  var tabheadclass = "grid-leadtabclass";
+  for (var i = 1; i <= totaltabs; i++) {
+    var tabhead = groupname + "h" + i;
+    var tabcontent = groupname + "c" + i;
+    if (i == activetab) {
+      $("#" + tabhead).attr("class", activetabclass);
+      $("#" + tabcontent).show();
+      if (activetype == "default") {
+        griddata("");
+      } else if (activetype == "todayfollowup") {
+        followupforday("");
+      } else if (activetype == "nofollowup") {
+        nofollowup("");
+      } else if (activetype == "notviewed") {
+        notviewed("");
+      }
+    } else {
+      $("#" + tabhead).attr("class", tabheadclass);
+      $("#" + tabcontent).hide();
+    }
+  }
+}
+
 // Function to display today's followup.
 
 function followupforday(startlimit) {
@@ -1528,7 +1558,7 @@ function followupforday(startlimit) {
     startlimit +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext63 = $.ajax({
     type: "POST",
     url: queryString,
@@ -1575,7 +1605,7 @@ function getmorerecordsfollowup(startlimit, slnocount, showtype) {
     showtype +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext64 = $.ajax({
     type: "POST",
     url: queryString,
@@ -1625,7 +1655,7 @@ function nofollowup(startlimit) {
     startlimit +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext65 = $.ajax({
     type: "POST",
     url: queryString,
@@ -1672,7 +1702,7 @@ function getmorerecordsnofollowup(startlimit, slnocount, showtype) {
     showtype +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext66 = $.ajax({
     type: "POST",
     url: queryString,
@@ -1722,7 +1752,7 @@ function notviewed(startlimit) {
     startlimit +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php"; //alert(passdata);
+  var queryString = "../ajax/indextable.php"; //alert(passdata);
   ajaxobjext67 = $.ajax({
     type: "POST",
     url: queryString,
@@ -1769,7 +1799,7 @@ function getmorerecordsnotviewed(startlimit, slnocount, showtype) {
     showtype +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext68 = $.ajax({
     type: "POST",
     url: queryString,
@@ -1822,7 +1852,7 @@ function viewotherleads(startlimit) {
       id +
       "&dummy=" +
       Math.floor(Math.random() * 10230000000);
-    var queryString = "../ajax/simplelead.php"; //alert(passdata);
+    var queryString = "../ajax/indextable.php"; //alert(passdata);
     ajaxobjext69 = $.ajax({
       type: "POST",
       url: queryString,
@@ -1864,7 +1894,7 @@ function getmoreofotherleads(startlimit, slnocount, showtype) {
     id +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext70 = $.ajax({
     type: "POST",
     url: queryString,
@@ -1912,7 +1942,7 @@ function downloadlogs(startlimit) {
       id +
       "&dummy=" +
       Math.floor(Math.random() * 10230000000); //alert(passdata)
-    var queryString = "../ajax/simplelead.php"; //alert(passdata);
+    var queryString = "../ajax/indextable.php"; //alert(passdata);
     ajaxobjext71 = $.ajax({
       type: "POST",
       url: queryString,
@@ -1954,7 +1984,7 @@ function getmoreofdownloadlogs(startlimit, slnocount, showtype) {
     id +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext72 = $.ajax({
     type: "POST",
     url: queryString,
@@ -2072,7 +2102,7 @@ function resetlink(type) {
         todealerid +
         "&dummy=" +
         Math.floor(Math.random() * 10230000000); //alert(passdata)
-      var queryString = "../ajax/simplelead.php";
+      var queryString = "../ajax/indextable.php";
       ajaxobjext73 = $.ajax({
         type: "POST",
         url: queryString,
@@ -2141,7 +2171,7 @@ function newtog() {
 
 function updatestatusstrip() {
   $("#leadstotal").html(processing());
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   var passdata =
     "&submittype=statusstrip&dummy=" + Math.floor(Math.random() * 10230000000); //alert(passdata)
   ajaxobjext74 = $.ajax({
@@ -2319,7 +2349,7 @@ function createlead() {
     newleadsource.val() +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext75 = $.ajax({
     type: "POST",
     url: queryString,
@@ -2427,7 +2457,7 @@ function sendsms(actiontype) {
         leadid.val() +
         "&dummy=" +
         Math.floor(Math.random() * 10230000000); //alert(passdata)
-      var queryString = "../ajax/simplelead.php";
+      var queryString = "../ajax/indextable.php";
       ajaxobjext76 = $.ajax({
         type: "POST",
         url: queryString,
@@ -2474,7 +2504,7 @@ function showsmslogs(leadid, startlimit) {
     startlimit +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext77 = $.ajax({
     type: "POST",
     url: queryString,
@@ -2514,7 +2544,7 @@ function getmoreofsmslogs(startlimit, slnocount, showtype) {
     id +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext78 = $.ajax({
     type: "POST",
     url: queryString,
@@ -2552,7 +2582,7 @@ function gridtoformofsms(smsid) {
     smsid +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext79 = $.ajax({
     type: "POST",
     url: queryString,
@@ -2646,7 +2676,7 @@ function closeopentxtbox(type) {
         initialremarks +
         "&dummy=" +
         Math.floor(Math.random() * 10230000000); //alert(passdata)
-      var queryString = "../ajax/simplelead.php";
+      var queryString = "../ajax/indextable.php";
       ajaxobjext101 = $.ajax({
         type: "POST",
         url: queryString,
@@ -2704,7 +2734,7 @@ function checkDataRow(value) {
     leadid +
     "&dummy=" +
     Math.floor(Math.random() * 10230000000); //alert(passdata)
-  var queryString = "../ajax/simplelead.php";
+  var queryString = "../ajax/indextable.php";
   ajaxobjext101 = $.ajax({
     type: "POST",
     url: queryString,

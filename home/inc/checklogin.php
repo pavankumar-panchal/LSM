@@ -2,6 +2,9 @@
 
 include("../functions/phpfunctions.php"); 
 include("../inc/eventloginsert.php");
+include("../reminder.php");
+
+
 session_start();
 
 
@@ -85,5 +88,5 @@ session_start();
 		}
 	}
 
-
 ?>
+

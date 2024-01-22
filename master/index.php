@@ -1,10 +1,11 @@
 <?php
 include("../inc/checklogin.php");
-
 //Permission check for the page
 if($cookie_usertype <> "Admin")
 	header("Location:../home");
-
+?>
+<?php
+include("../reminder.php");
 ?>
 <!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml">

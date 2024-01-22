@@ -19,4 +19,5 @@ $dbhost_log = "localhost"; $dbuser_log = "root"; $dbpwd_log = ""; $dbname_log = 
 	//$dbhost = "192.168.1.11"; $dbuser = "root"; $dbpwd = "Imax"; $dbname = "relyon_userlogin2";
 	//$dbhost = "192.168.1.11"; $dbuser = "root"; $dbpwd = "Imax";	$dbname = "relyon_userlogin2";
 
+
 ?>

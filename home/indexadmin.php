@@ -30,15 +30,8 @@ if ($cookie_lastlogindate == "First Time") {
   <link type="text/css" rel="stylesheet" href="../css/datepickercontrol.css?dummy=<?php echo (rand()); ?>">
   <script src="../functions/jquery-1.4.2.min.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
   <script src="../functions/jsfunctions.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
-  <script src="../functions/simplelead.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
   <script src="../functions/datepickercontrol.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
-
   <script src="../functions/indextable.js?dummy=<?php echo (rand()); ?>" language="javascript"></script>
-
-
-
-
-  <!-- <script type="text/javascript" src="../functions/reminder.js"></script> -->
 
 </head>
 

@@ -636,7 +636,7 @@ if ($filteredtoexcel == 'yes') {
                                                                   <tr>
                                                                   <td valign="top">Next Followup Date:</td>
                                                                    <td width="20%" valign="top">
-                                                               <input name="followupdate" type="text" class="formfields" id="DPC_followupdate" size="20" maxlength="10" value="22-01-2024" readonly="readonly"/></td>
+                                                               <input name="followupdate" type="text" class="formfields" id="DPC_followupdate" size="20" maxlength="10" value="" readonly="readonly"/></td>
                                                                <td width="20%" valign="top">
                                                               <div align="center" style="display: flex; justify-content: space-around;">
                                                              <input type="time" name="followuptime" id="DPC_followuptime" class="formfields" />
@@ -1295,7 +1295,8 @@ if ($filteredtoexcel == 'yes') {
                   <td width="86%" align="left"><div id="followupsduetoexcel" align="left">( <a style="cursor:pointer;" onclick="gridtoexcel('notviewed')" class="headerclass"><strong>Export to Excel</strong></a> )</div></td>
                 </tr>
                 <tr>
-                  <td colspan="3" ><div id="tabgroupgridnv1" style="overflow:auto; height:260px; width:945px" align="center">
+                  <td colspan="3" >
+                    <div id="tabgroupgridnv1" style="overflow:auto; height:260px; width:945px" align="center">
                       <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                           <td><div id="tabgroupgridnv1_1" align="center">

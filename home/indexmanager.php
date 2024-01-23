@@ -296,7 +296,13 @@ else
         <tr>
           <td colspan="9"><div id="container" style="width: 800px; height: 300px; margin: 0 auto">
               <script type="text/javascript" src="../functions/highchartmanager.js?dummy=<?php echo (rand());?>"></script>
-            </div></td>
+
+            
+
+            </div>
+            <?php include("indextable.php"); ?>
+          
+          </td>
         </tr>
       </table></td>
           </tr>

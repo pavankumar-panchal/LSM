@@ -418,7 +418,3 @@ function resetproductchange() {
       $("#prior-sms-error").html("");
     }
   }
-
-
-
-

@@ -1,49 +1,40 @@
 var ajaxcall233 = null;
-function refreshmcaarray()
-{
-	$('#searchhidden').val('false');
-	var form = $('#customerselectionprocess');
-	var form = $('#cardsearchfilterform');
-	var passData = "switchtype=generatemcalist&dummy=" + Math.floor(Math.random()*10054300000);
-	$('#customerselectionprocess').html(processing());
-	queryString = "../ajax/mcacompanies.php";
-	ajaxcall2 = $.ajax(
-	{
-		type: "POST",url: queryString, data: passData, cache: false,dataType: "json",
-		success: function(ajaxresponse,status)
-		{	
-			if(ajaxresponse == 'Thinking to redirect')
-			{
-				window.location = "../logout.php";
-				return false;
-			}
-			else if(ajaxresponse.length > 0)
-			{
-				
-				var response = ajaxresponse;
-				var limitlist = 50;
-				var selectbox = $('#mcalist');
-				$('option', selectbox).remove();
-				var options = selectbox.attr('options');
-				for( var i=0; i<limitlist; i++)
-				{
-					var splits = response[i].split("^");
-					options[options.length] = new Option(splits[0], splits[1]);
-				}
-				$('#customerselectionprocess').html(successsearchmessage('All Data...'));
-			}
-			else
-			{
-				$('#customerselectionprocess').html('');
-			}
-		}, 
-		error: function(a,b)
-		{
-			$("#customerselectionprocess").html(scripterror());
-		}
-	});	
-}
 
+function refreshmcaarray() {
+    $('#searchhidden').val('false');
+    var passData = "switchtype=generatemcalist&dummy=" + Math.floor(Math.random() * 10054300000);
+    var queryString = "../ajax/mcacompanies.php";
+    
+    $.ajax({
+        type: "POST",
+        url: queryString,
+        data: passData,
+        cache: false,
+        dataType: "json",
+        success: function (ajaxresponse, status) {
+            if (ajaxresponse === 'Thinking to redirect') {
+                window.location = "../logout.php";
+                return false;
+            } else if (ajaxresponse.length > 0) {
+                var response = ajaxresponse;
+                var limitlist = Math.min(response.length, 50); // Limit the loop to response length or 50, whichever is smaller
+                var selectbox = $('#mcalist');
+                selectbox.empty(); // Clear existing options
+                
+                for (var i = 0; i < limitlist; i++) {
+                    var splits = response[i].split("^");
+                    selectbox.append(new Option(splits[0], splits[1]));
+                }
+                $('#customerselectionprocess').html(successsearchmessage('All Data...'));
+            } else {
+                $('#customerselectionprocess').html('');
+            }
+        },
+        error: function (xhr, status, error) {
+            $("#customerselectionprocess").html(scripterror());
+        }
+    });
+}
 
 function searchmcalist()
 {
@@ -122,6 +113,8 @@ function searchmcalist()
 	  });	
 
 }
+
+
 
 
 function mcasearch(e)
@@ -474,6 +467,8 @@ function saveadditionaldetails()
 	}
 
 }
+
+
 
 function resetsaveform()
 {

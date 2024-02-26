@@ -1,5 +1,5 @@
 <?php
-ini_set("memory_limit","-1");
+// ini_set("memory_limit","-1");
 include("../inc/ajax-referer-security.php");
 include("../functions/phpfunctions.php");
 include("../inc/getuserslno.php");
@@ -10,7 +10,7 @@ switch($switchtype)
 	case 'getmcacount':
 	{
 		$responsearray3 = array();
-		$query = "select count(*) as count from mca_companies  ORDER BY company";
+		$query = "select count(*) as count from mca_companies ORDER BY company";
 		$resultfetch = runmysqlqueryfetch($query);
 		$count = $resultfetch['count'];
 		$responsearray3['count'] = $count;

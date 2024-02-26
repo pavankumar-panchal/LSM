@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Input Form</title>
+</head>
+<body>
+    <form action="process_form.php" method="post">
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required>
+
+        <label for="ampm">AM/PM:</label>
+        <select id="ampm" name="ampm" required>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+        </select>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

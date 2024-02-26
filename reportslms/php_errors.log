@@ -1,0 +1,14 @@
+[04-Jan-2014 06:42:54 UTC] PHP Warning:  fopen(/home/manju/public/lms.relyonsoft.net/public/filescreated/LMS-DLRS-admin-20140104064252.xls): failed to open stream: Permission denied in /home/manju/public/lms.relyonsoft.net/public/phpgeneration/PHPExcel/Shared/OLE/OLE_Root.php on line 109
+[04-Jan-2014 06:42:54 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Can't open /home/manju/public/lms.relyonsoft.net/public/filescreated/LMS-DLRS-admin-20140104064252.xls. It may be in use or protected.' in /home/manju/public/lms.relyonsoft.net/public/phpgeneration/PHPExcel/Shared/OLE/OLE_Root.php:111
+Stack trace:
+#0 /home/manju/public/lms.relyonsoft.net/public/phpgeneration/PHPExcel/Writer/Excel5.php(238): PHPExcel_Shared_OLE_PPS_Root->save('/home/manju/pub...')
+#1 /home/manju/public/lms.relyonsoft.net/public/reportslms/dealerlisttoexcel.php(282): PHPExcel_Writer_Excel5->save('/home/manju/pub...')
+#2 {main}
+  thrown in /home/manju/public/lms.relyonsoft.net/public/phpgeneration/PHPExcel/Shared/OLE/OLE_Root.php on line 111
+[04-Jan-2014 06:43:07 UTC] PHP Warning:  fopen(/home/manju/public/lms.relyonsoft.net/public/filescreated/LMS-DLRS-admin-20140104064305.xls): failed to open stream: Permission denied in /home/manju/public/lms.relyonsoft.net/public/phpgeneration/PHPExcel/Shared/OLE/OLE_Root.php on line 109
+[04-Jan-2014 06:43:07 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Can't open /home/manju/public/lms.relyonsoft.net/public/filescreated/LMS-DLRS-admin-20140104064305.xls. It may be in use or protected.' in /home/manju/public/lms.relyonsoft.net/public/phpgeneration/PHPExcel/Shared/OLE/OLE_Root.php:111
+Stack trace:
+#0 /home/manju/public/lms.relyonsoft.net/public/phpgeneration/PHPExcel/Writer/Excel5.php(238): PHPExcel_Shared_OLE_PPS_Root->save('/home/manju/pub...')
+#1 /home/manju/public/lms.relyonsoft.net/public/reportslms/dealerlisttoexcel.php(282): PHPExcel_Writer_Excel5->save('/home/manju/pub...')
+#2 {main}
+  thrown in /home/manju/public/lms.relyonsoft.net/public/phpgeneration/PHPExcel/Shared/OLE/OLE_Root.php on line 111

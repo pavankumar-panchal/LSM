@@ -1,4 +1,5 @@
 <?php
+
 ini_set("memory_limit","-1");
 include("../inc/ajax-referer-security.php");
 include("../functions/phpfunctions.php");
@@ -130,6 +131,7 @@ switch($submittype)
 			  $leadsubstatus = $_POST['leadsubstatus'];
 			  $filter_followupdate1 = $_POST['filter_followupdate1'];
 			  $filter_followupdate2 = $_POST['filter_followupdate2'];
+			  $followuptime=$_POST['followuptime'];
 			  $dropterminatedstatus = $_POST['dropterminatedstatus'];
 			  $searchtext = $_POST['searchtext'];
 			  $subselection = $_POST['subselection'];
@@ -186,7 +188,9 @@ switch($submittype)
 							while($leadfetch0 = mysqli_fetch_array($leadresult0))
 							{
 								$follow[] = "'".$leadfetch0['leadid']."'";
-								//$follow[] = "lms_followup.followupdate = '".$leadfetch0['followupdate']."'";
+
+								$follow[] = "lms_followup.followupdate = '".$leadfetch0['followupdate']."'";    // changed 
+
 							}
 							$followupvalues = implode(",",$follow);
 							$followuppiece = " AND lms_followup.leadid in (" . $followupvalues . ")";
@@ -526,12 +530,13 @@ switch($submittype)
 			$leadid = $_POST['form_recid'];
 			$form_leadremarks = $_POST['form_leadremarks'];
 			$followupdate = $_POST['followupdate'];
+			$followuptime = $_POST['followuptime'];
 			$enteredddate = datetimelocal("Y-m-d");
 			
 			$output = "";
 			if($output == "")
 			{
-				if($followupdate == "")
+				if($followupdate == "" && $followuptime == "")
 				{
 					$query = "select * from leads where id = '".$leadid."'";
 					$result = runmysqlqueryfetch($query);
@@ -565,8 +570,9 @@ switch($submittype)
 	
 				$query = "UPDATE `lms_followup` SET followupstatus = 'DONE' WHERE leadid = '".$leadid."'";
 				$result = runmysqlquery($query);
-				
-				$query = "insert into `lms_followup` (leadid, remarks, entereddate, followupdate, enteredby, followupstatus) values('".$leadid."', '".$form_leadremarks."', '".$enteredddate."', '".$followupdate."', '".$enteredby."', 'PENDING')";
+				$query = "INSERT INTO `lms_followup` (leadid, remarks, entereddate, followupdate, followuptime, enteredby, followupstatus) VALUES ('".$leadid."', '".$form_leadremarks."', '".$enteredddate."', '".$followupdate."', '".$followuptime."', '".$enteredby."', 'PENDING')";
+
+				// $query = "insert into `lms_followup`(leadid, remarks, entereddate, followupdate , followuptime, enteredby, followupstatus) values('".$leadid."', '".$form_leadremarks."', '".$enteredddate."', '".$followupdate."' ,'".$followuptime."','".$enteredby."', 'PENDING')";
 				$result = runmysqlquery($query);
 				
 				// Insert logs on lead followup
@@ -589,11 +595,12 @@ switch($submittype)
 			$cookie_usertype = lmsgetcookie('lmsusersort');
 			$leadid = $_POST['form_recid'];
 						
-			$query = "select lms_followup.followupid AS id, lms_followup.entereddate AS entereddate, lms_followup.remarks AS remarks, lms_followup.followupdate AS followupdate, lms_followup.enteredby AS enteredby from lms_followup WHERE lms_followup.leadid = '".$leadid."' ORDER BY lms_followup.followupid";
-
+			$query = "select lms_followup.followupid AS id, lms_followup.entereddate AS entereddate, lms_followup.remarks AS remarks, lms_followup.followupdate AS followupdate,lms_followup.followuptime AS followuptime, lms_followup.enteredby AS enteredby from lms_followup WHERE lms_followup.leadid = '".$leadid."' ORDER BY lms_followup.followupid";
+			
+			// $query = "SELECT lms_followup.followupid AS id, lms_followup.entereddate AS entereddate, lms_followup.remarks AS remarks, lms_followup.followupdate AS followupdate, lms_followup.followuptime AS followuptime, lms_followup.enteredby AS enteredby FROM lms_followup WHERE lms_followup.leadid = '".$leadid."' ORDER BY lms_followup.followupid";
 			$grid = '<table width="100%" border="0" bordercolor="#ffffff" cellspacing="0" cellpadding="2" id="gridtable"><tbody>';
 			//Write the header Row of the table
-			$grid .= '<tr class="gridheader"><td width="9%" nowrap="nowrap"  class="tdborder">Sl No</td><td width="14%" nowrap="nowrap"  class="tdborder">Date</td><td width="37%" nowrap="nowrap"  class="tdborder">Remarks</td><td width="20%" nowrap="nowrap"  class="tdborder">Next Follow-up</td><td width="20%" nowrap="nowrap"  class="tdborder">Entered by</td></tr>';
+			$grid .= '<tr class="gridheader"><td width="9%" nowrap="nowrap"  class="tdborder">Sl No</td><td width="14%" nowrap="nowrap"  class="tdborder">Date</td><td width="37%" nowrap="nowrap"  class="tdborder">Remarks</td><td width="20%" nowrap="nowrap"  class="tdborder">Next Follow-up</td><td width="20%" nowrap="nowrap"  class="tdborder">Next Follow-up Time</td><td width="20%" nowrap="nowrap"  class="tdborder">Entered by</td></tr>';
 			$result = runmysqlquery($query);
 			$resultcount = mysqli_num_rows($result);
 			$loopcount = 0; 
@@ -603,7 +610,19 @@ switch($submittype)
 				{
 					$loopcount++;
 					$grid .= '<tr class="gridrow" onclick="javascript:followuptoform(\''.$fetch['id'].'\');">';
-					$grid .= "<td nowrap='nowrap'  class='tdborder'>".$loopcount."</td><td nowrap='nowrap'  class='tdborder'>".changedateformat($fetch['entereddate'])."</td><td nowrap='nowrap'  class='tdborder'>".gridtrim30($fetch['remarks'])."</td><td nowrap='nowrap'  class='tdborder'>".changedateformat($fetch['followupdate'])."</td><td nowrap='nowrap'  class='tdborder'>".getuserdisplayname($fetch['enteredby'])."</td>";
+					
+					
+					// $grid .= "<td nowrap='nowrap'  class='tdborder'>".$loopcount."</td><td nowrap='nowrap'  class='tdborder'>".changedateformat($fetch['entereddate'])."</td><td nowrap='nowrap'  class='tdborder'>".gridtrim30($fetch['remarks'])."</td><td nowrap='nowrap'  class='tdborder'>".changedateformat($fetch['followupdate'])."</td><td nowrap='nowrap'  class='tdborder'>".getuserdisplayname($fetch['enteredby'])."</td>";
+					
+					$grid .= "<td nowrap='nowrap' class='tdborder'>".$loopcount."</td>".
+         "<td nowrap='nowrap' class='tdborder'>".changedateformat($fetch['entereddate'])."</td>".
+         "<td nowrap='nowrap' class='tdborder'>".gridtrim30($fetch['remarks'])."</td>".
+         "<td nowrap='nowrap' class='tdborder'>".changedateformat($fetch['followupdate'])."</td>".
+         "<td nowrap='nowrap' class='tdborder'>".changedateformat($fetch['followuptime'])."</td>".
+         "<td nowrap='nowrap' class='tdborder'>".getuserdisplayname($fetch['enteredby'])."</td>";
+
+					
+					
 					$grid .= '</tr>';
 				}
 			}
@@ -621,7 +640,10 @@ switch($submittype)
 			$cookie_username = lmsgetcookie('lmsusername');
 			$cookie_usertype = lmsgetcookie('lmsusersort');
 			$followupid = $_POST['followupid'];
-			$query = "select lms_followup.remarks AS remarks, lms_followup.followupdate AS followupdate from lms_followup WHERE lms_followup.followupid = '".$followupid."'";
+			$query = "SELECT lms_followup.remarks AS remarks, lms_followup.followupdate AS followupdate, lms_followup.followuptime AS followuptime FROM lms_followup WHERE lms_followup.followupid = '".$followupid."'";
+
+		
+			// $query = "select lms_followup.remarks AS remarks, lms_followup.followupdate AS followupdate lms_followup.followuptime AS followuptime from lms_followup WHERE lms_followup.followupid = '".$followupid."'";
 			$result = runmysqlqueryfetch($query);
 
 			$output = $result['remarks']."|^|".changedateformat($result['followupdate']);
